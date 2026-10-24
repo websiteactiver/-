@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المدرسة الرائدة | École Pionnière – 2034</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060b1e; --bg2:#0a1333; --cyan:#19e7ff; --green:#1ddb7a;
+  --red:#ff2d55; --gold:#ffd35c; --glass:rgba(255,255,255,.06);
+  --line:rgba(25,231,255,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Cairo','Tajawal',sans-serif; color:#eaf4ff;
+  background:radial-gradient(1200px 800px at 80% -10%,#15205c 0,transparent 60%),
+             radial-gradient(1000px 700px at 0% 110%,#06302a 0,transparent 55%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  min-height:100vh; overflow-x:hidden; position:relative;
+}
+/* animated starfield */
+.stars,.stars2{position:fixed;inset:0;z-index:0;pointer-events:none}
+.stars{background-image:radial-gradient(1.5px 1.5px at 20% 30%,#fff,transparent),radial-gradient(1.5px 1.5px at 70% 60%,#9fe8ff,transparent),radial-gradient(1px 1px at 40% 80%,#fff,transparent),radial-gradient(1px 1px at 90% 20%,#bff,transparent);background-size:400px 400px;animation:drift 90s linear infinite;opacity:.6}
+.stars2{background-image:radial-gradient(1px 1px at 10% 50%,#fff,transparent),radial-gradient(1.5px 1.5px at 60% 10%,#8ff,transparent),radial-gradient(1px 1px at 85% 75%,#fff,transparent);background-size:300px 300px;animation:drift 60s linear infinite reverse;opacity:.4}
+@keyframes drift{from{background-position:0 0}to{background-position:400px 400px}}
+/* floating orbs */
+.orb{position:fixed;border-radius:50%;filter:blur(40px);opacity:.5;z-index:0;pointer-events:none;animation:float 14s ease-in-out infinite}
+.orb.a{width:280px;height:280px;background:var(--cyan);top:-60px;right:-40px}
+.orb.b{width:240px;height:240px;background:var(--green);bottom:-50px;left:-30px;animation-delay:-4s}
+.orb.c{width:180px;height:180px;background:var(--red);top:40%;left:45%;opacity:.3;animation-delay:-8s}
+@keyframes float{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(30px) translateX(20px)}}
+.wrap{position:relative;z-index:2;max-width:1150px;margin:0 auto;padding:24px 18px 40px}
+/* ===== TOP KINGDOM BAR ===== */
+.kingdom{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:18px 0 6px}
+.emblem{width:92px;height:104px;filter:drop-shadow(0 0 14px rgba(29,219,122,.55));animation:pulseGlow 3.5s ease-in-out infinite}
+@keyframes pulseGlow{0%,100%{filter:drop-shadow(0 0 10px rgba(29,219,122,.4))}50%{filter:drop-shadow(0 0 22px rgba(29,219,122,.8))}}
+.kingdom h1{font-size:clamp(18px,3vw,26px);font-weight:900;letter-spacing:.5px;background:linear-gradient(90deg,#fff,#ffd35c,#1ddb7a,#fff);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shine 6s linear infinite}
+.kingdom .fr{font-family:'Orbitron',sans-serif;font-size:clamp(11px,1.6vw,14px);color:#bfe9ff;letter-spacing:3px}
+@keyframes shine{to{background-position:200% center}}
+.flagline{height:4px;width:180px;border-radius:4px;background:linear-gradient(90deg,var(--red),var(--green));box-shadow:0 0 16px var(--green)}
+/* ===== HERO / NAMES ===== */
+.massar{max-width:560px;margin:18px auto 4px;border-radius:18px;background:linear-gradient(135deg,rgba(25,231,255,.10),rgba(10,15,40,.55));border:1px solid rgba(25,231,255,.35);overflow:hidden;box-shadow:0 0 24px rgba(25,231,255,.12)}
+.massar-head{width:100%;cursor:pointer;display:flex;align-items:center;gap:12px;padding:16px 18px;background:transparent;border:none;color:#fff;font-family:'Cairo';text-align:right}
+.massar-head .ic{font-size:26px}
+.massar-head .tx{display:flex;flex-direction:column;flex:1;text-align:center}
+.massar-head .tx .ar{font-size:18px;font-weight:800}
+.massar-head .tx .fr{font-size:11px;color:#9fd9ff;font-family:Orbitron;margin-top:2px}
+.massar-head .arrow{font-size:16px;color:#9fd9ff;transition:transform .3s}
+.massar.open .massar-head .arrow{transform:rotate(180deg)}
+.massar-body{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 20px}
+.massar.open .massar-body{max-height:900px;padding:4px 20px 20px}
+.mlbl{display:block;color:#cfeaff;font-size:13px;margin:12px 0 5px;font-weight:700}
+.minp{width:100%;box-sizing:border-box;padding:12px 14px;border-radius:12px;border:1px solid rgba(25,231,255,.4);background:rgba(5,12,30,.6);color:#fff;font-family:'Cairo';font-size:15px;outline:none}
+.minp:focus{border-color:var(--cyan);box-shadow:0 0 12px rgba(25,231,255,.3)}
+.massar-login{width:100%;margin-top:18px;cursor:pointer;border:none;border-radius:12px;padding:14px;font-family:'Cairo';font-size:17px;font-weight:800;color:#042814;background:linear-gradient(135deg,#1ddb7a,#0fae5e);box-shadow:0 6px 18px rgba(29,219,122,.4);transition:transform .2s,box-shadow .2s}
+.massar-login:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(29,219,122,.55)}
+.mnote{color:#9fd9ff;font-size:11px;margin:12px 0 0;text-align:center;line-height:1.6}
+.qlinks-wrap{margin-top:16px;padding-top:14px;border-top:1px dashed rgba(25,231,255,.25)}
+.qlinks-title{color:#cfeaff;font-size:13px;font-weight:800;margin-bottom:10px;text-align:center}
+.qlinks{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qlink{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;background:rgba(5,12,30,.55);border:1px solid rgba(25,231,255,.3);color:#fff;text-decoration:none;transition:transform .2s,border-color .2s,box-shadow .2s}
+.qlink:hover{transform:translateY(-2px);border-color:var(--cyan);box-shadow:0 6px 16px rgba(25,231,255,.25)}
+.qlink .qi{font-size:22px;flex-shrink:0}
+.qlink .qt{display:flex;flex-direction:column;font-size:13px;font-weight:700;line-height:1.3}
+.qlink .qt small{font-family:Orbitron;font-size:9px;color:#9fd9ff;font-weight:400;margin-top:2px;direction:ltr}
+@media(max-width:480px){.qlinks{grid-template-columns:1fr}}
+.hero{text-align:center;margin:26px 0 10px}
+.hero .title{font-size:clamp(28px,6vw,54px);font-weight:900;line-height:1.1;background:linear-gradient(90deg,var(--cyan),#fff,var(--green));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shine 5s linear infinite;text-shadow:0 0 30px rgba(25,231,255,.2)}
+.hero .sub{margin-top:6px;color:#bfe9ff;font-size:clamp(13px,2vw,17px);letter-spacing:1px}
+.badge-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:20px 0 6px}
+.id-badge{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:12px 18px;backdrop-filter:blur(8px);box-shadow:0 0 24px rgba(25,231,255,.12);min-width:230px}
+.id-badge .role{font-size:11px;letter-spacing:2px;color:var(--cyan);font-family:'Orbitron',sans-serif}
+.id-badge .nm{font-size:19px;font-weight:800;margin-top:3px}
+.id-badge .frn{font-size:12px;color:#9fd9ff}
+.id-badge.assist .role{color:var(--green)}
+/* ===== BUTTONS ===== */
+.btn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:34px 0 10px}
+.navbtn{position:relative;cursor:pointer;border:none;border-radius:20px;padding:26px 20px;text-align:center;color:#fff;font-family:'Cairo';overflow:hidden;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(10px);transition:transform .25s,box-shadow .25s}
+.navbtn:hover{transform:translateY(-6px) scale(1.02)}
+.navbtn .ic{font-size:40px;display:block;margin-bottom:8px}
+.navbtn .ar{font-size:22px;font-weight:900}
+.navbtn .fr{display:block;font-size:13px;letter-spacing:1px;margin-top:4px;opacity:.85;font-family:'Orbitron',sans-serif}
+.navbtn::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.18),transparent 70%);transform:translateX(-120%);transition:transform .6s}
+.navbtn:hover::after{transform:translateX(120%)}
+.navbtn.pio{box-shadow:0 0 30px rgba(25,231,255,.25);border-color:rgba(25,231,255,.5)}
+.navbtn.pio:hover{box-shadow:0 0 45px rgba(25,231,255,.55)}
+.navbtn.pri{box-shadow:0 0 30px rgba(29,219,122,.22);border-color:rgba(29,219,122,.5)}
+.navbtn.pri:hover{box-shadow:0 0 45px rgba(29,219,122,.5)}
+.navbtn.cyb{background:linear-gradient(135deg,rgba(255,45,85,.22),rgba(120,0,30,.3));border-color:rgba(255,45,85,.7);box-shadow:0 0 32px rgba(255,45,85,.35);animation:redpulse 2.4s ease-in-out infinite}
+.navbtn.lyc{box-shadow:0 0 30px rgba(170,120,255,.28);border-color:rgba(170,120,255,.6)}
+.navbtn.lyc:hover{box-shadow:0 0 46px rgba(170,120,255,.6)}
+.navbtn.uni{box-shadow:0 0 30px rgba(255,196,0,.25);border-color:rgba(255,196,0,.6)}
+.navbtn.uni:hover{box-shadow:0 0 46px rgba(255,196,0,.55)}
+.navbtn.ofp{box-shadow:0 0 30px rgba(29,219,122,.25);border-color:rgba(29,219,122,.55)}
+.navbtn.ofp:hover{box-shadow:0 0 46px rgba(29,219,122,.6)}
+@keyframes redpulse{0%,100%{box-shadow:0 0 25px rgba(255,45,85,.35)}50%{box-shadow:0 0 50px rgba(255,45,85,.75)}}
+/* ===== SECTIONS ===== */
+section{display:none;animation:fadeIn .5s ease}
+section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.sec-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:14px 0 22px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.sec-head h2{font-size:clamp(22px,4vw,34px);font-weight:900}
+.sec-head .city{color:var(--gold);font-size:15px;font-weight:700}
+.back{cursor:pointer;background:var(--glass);border:1px solid var(--line);color:#eaf4ff;padding:10px 18px;border-radius:12px;font-family:'Cairo';font-weight:700}
+.back:hover{background:rgba(25,231,255,.15)}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.tab{cursor:pointer;background:var(--glass);border:1px solid var(--line);color:#cfeaff;padding:9px 16px;border-radius:999px;font-weight:700;font-size:14px;transition:.2s}
+.tab.on{background:linear-gradient(90deg,var(--cyan),var(--green));color:#042;border-color:transparent;box-shadow:0 0 18px rgba(25,231,255,.4)}
+.subject{margin-bottom:16px;border:1px solid var(--line);border-radius:16px;background:var(--glass);overflow:hidden}
+.subject h3{font-size:19px;font-weight:800;color:var(--cyan);margin:0;padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:8px;flex-wrap:wrap;transition:background .2s;user-select:none}
+.subject h3:hover{background:rgba(25,231,255,.07)}
+.subject h3 .fr{font-size:12px;color:#9fd9ff;font-family:'Orbitron'}
+.subject h3 .chev{margin-inline-start:auto;font-size:15px;color:#9fd9ff;transition:transform .3s}
+.subject h3::after{content:'\25be';margin-inline-start:auto;font-size:15px;color:#9fd9ff;transition:transform .3s}
+.subject.open h3::after{transform:rotate(180deg)}
+.subject.open h3 .chev{transform:rotate(180deg)}
+.subject .lessons,.subject .roadmap{display:none}
+.subject.open .lessons,.subject.open .roadmap{display:grid;padding:0 18px 18px}
+.lessons{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.uni-item{display:flex;flex-direction:column;gap:3px;background:rgba(5,20,40,.5);border:1px solid var(--line);border-radius:12px;padding:11px 13px;font-size:14px;font-weight:700;color:#e6f3ff}
+.uni-item small{font-family:Orbitron;font-size:10px;color:#9fd9ff;font-weight:400;direction:ltr}
+.uni-item.danger{background:linear-gradient(135deg,rgba(255,45,85,.18),rgba(120,0,30,.25));border-color:rgba(255,45,85,.75);color:#ff9fb0;box-shadow:0 0 16px rgba(255,45,85,.35);animation:redpulse 2.6s ease-in-out infinite}
+.uni-item.danger small{color:#ffc2cd}
+.uni-note{font-size:12px;color:#9fd9ff;padding:0 18px 14px;line-height:1.7}
+.lesson{display:block;text-decoration:none;color:inherit;background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:.25s;position:relative}
+.lesson:hover{transform:translateY(-4px);border-color:var(--cyan);box-shadow:0 0 22px rgba(25,231,255,.3)}
+.lesson .lt{font-weight:800;font-size:15px;display:flex;align-items:center;gap:7px}
+.lesson .ld{font-size:13px;color:#bcd6ee;margin-top:8px;line-height:1.6}
+.exp{margin-top:10px}
+.exp-goal{background:rgba(25,231,255,.08);border:1px solid rgba(25,231,255,.25);border-radius:10px;padding:9px 11px;font-size:13px;color:#dff2ff;line-height:1.7}
+.exp-steps{margin:9px 0;display:flex;flex-direction:column;gap:6px}
+.exp-step{display:flex;gap:7px;align-items:flex-start;font-size:13px;color:#cfe6f7;background:rgba(5,20,40,.45);border-right:3px solid var(--green);border-radius:8px;padding:7px 10px;line-height:1.6}
+.exp-ex{font-size:13px;color:#ffe9b8;background:rgba(255,200,60,.08);border:1px solid rgba(255,200,60,.22);border-radius:10px;padding:8px 11px;line-height:1.7}
+.exp-sum{margin-top:8px;font-size:13px;color:#bff5d6;background:rgba(29,219,122,.1);border:1px solid rgba(29,219,122,.3);border-radius:10px;padding:8px 11px;line-height:1.7}
+.exp-fr{margin-top:8px;font-size:12px;color:#9fd9ff;direction:ltr;line-height:1.6}
+.lesson .play{margin-top:10px;display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#042;background:linear-gradient(90deg,var(--cyan),var(--green));padding:5px 12px;border-radius:999px;font-weight:800}
+.cyber-hero{text-align:center;padding:30px 18px;border-radius:20px;background:linear-gradient(135deg,rgba(255,45,85,.12),rgba(10,15,40,.5));border:1px solid rgba(255,45,85,.4);margin-bottom:24px}
+.cyber-hero .big{font-size:clamp(24px,5vw,38px);font-weight:900;color:#ff6b86;text-shadow:0 0 20px rgba(255,45,85,.5)}
+.cyber-hero .fr{color:#ffb3c1;font-family:'Orbitron';letter-spacing:2px;margin-top:6px}
+footer{position:relative;z-index:2;margin-top:40px;padding:26px 18px;text-align:center;border-top:1px solid var(--line);background:rgba(4,8,24,.6);backdrop-filter:blur(6px)}
+footer .mk{font-weight:800;color:#dff3ff}
+footer .mkf{font-family:'Orbitron';font-size:12px;color:#9fd9ff;letter-spacing:1px;margin-top:4px}
+.wa{display:inline-flex;align-items:center;gap:10px;margin-top:16px;background:linear-gradient(90deg,#25d366,#128c7e);color:#fff;text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:800;box-shadow:0 0 24px rgba(37,211,102,.4);transition:.2s}
+.wa:hover{transform:scale(1.05)}
+.wa small{display:block;font-weight:400;font-size:11px;opacity:.9}
+.consult{max-width:660px;margin:14px auto 0;font-size:13px;color:#cfe6ff;line-height:1.7}
+@media(max-width:560px){.id-badge{min-width:100%}}
+/* ===== THEME TOGGLE ===== */
+.theme-toggle{position:fixed;top:14px;left:14px;z-index:50;display:flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:6px 10px;backdrop-filter:blur(10px);cursor:pointer;box-shadow:0 0 18px rgba(25,231,255,.3);font-family:'Orbitron',sans-serif;font-size:11px;color:var(--cyan);user-select:none;transition:.25s}
+.theme-toggle:hover{box-shadow:0 0 26px rgba(25,231,255,.6)}
+.theme-toggle .sw{position:relative;width:42px;height:22px;border-radius:999px;background:linear-gradient(90deg,#0a1333,#15205c);border:1px solid var(--line);transition:.3s}
+.theme-toggle .sw::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:linear-gradient(90deg,var(--cyan),var(--green));transition:.3s;box-shadow:0 0 10px var(--cyan)}
+body.light .theme-toggle .sw::after{left:22px}
+.theme-toggle .ic{font-size:14px}
+/* ===== NOTICE ===== */
+.notice{margin:18px 0 4px;border-radius:18px;padding:16px 20px;background:linear-gradient(135deg,rgba(255,211,92,.12),rgba(25,231,255,.08));border:1px solid rgba(255,211,92,.45);box-shadow:0 0 26px rgba(255,211,92,.2);position:relative;overflow:hidden}
+.notice::before{content:'📢';position:absolute;font-size:70px;opacity:.08;top:-10px;left:10px}
+.notice .nt{font-weight:900;color:var(--gold);font-size:16px;display:flex;align-items:center;gap:8px}
+.notice .nd{margin-top:6px;color:#eaf4ff;font-size:14px;line-height:1.8}
+.notice .nf{display:block;margin-top:4px;color:#9fd9ff;font-size:12px;direction:ltr;font-family:'Orbitron'}
+/* ===== CATEGORY BUTTONS ===== */
+.cats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.catbtn{cursor:pointer;background:var(--glass);border:1px solid var(--line);color:#dff3ff;padding:10px 16px;border-radius:14px;font-family:'Cairo';font-weight:800;font-size:14px;transition:.2s}
+.catbtn.on{background:linear-gradient(90deg,var(--red),var(--gold));color:#210;border-color:transparent;box-shadow:0 0 20px rgba(255,211,92,.45)}
+.catbtn:hover{transform:translateY(-2px)}
+/* ===== CYBER EXTRA ===== */
+.cyber-sub h3{color:#ff6b86}
+.roadmap{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:10px}
+.step{background:linear-gradient(135deg,rgba(255,45,85,.1),rgba(10,15,40,.5));border:1px solid rgba(255,45,85,.35);border-radius:14px;padding:16px;position:relative}
+.step .sn{position:absolute;top:-10px;right:-10px;width:30px;height:30px;border-radius:50%;background:linear-gradient(90deg,var(--red),#ff8aa0);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-family:'Orbitron';box-shadow:0 0 14px rgba(255,45,85,.6)}
+.step .st{font-weight:800;color:#ff8aa0;font-size:15px}
+.step .sd{font-size:13px;color:#ffd7df;margin-top:6px;line-height:1.6}
+.lesson.tool{border-left:3px solid var(--red)}
+.lesson.tool .lt{color:#ff8aa0}
+/* ===== LIGHT THEME ===== */
+body.light{--bg:#eaf2ff;--bg2:#dbe7ff;--glass:rgba(10,30,70,.06);--line:rgba(10,90,160,.3);color:#0a1b3a;background:radial-gradient(1200px 800px at 80% -10%,#bfe0ff 0,transparent 60%),radial-gradient(1000px 700px at 0% 110%,#c8ffe8 0,transparent 55%),linear-gradient(160deg,#eaf2ff,#dbe7ff)}
+body.light .sub,body.light .id-badge .frn,body.light .subject h3 .fr{color:#2a4a7a}
+body.light .lesson,body.light .id-badge,body.light .navbtn,body.light .tab,body.light .catbtn,body.light .back{color:#0a1b3a}
+body.light .lesson .ld,body.light .notice .nd{color:#1a3358}
+body.light .stars,body.light .stars2{opacity:.15}
+body.light .orb{opacity:.25}
+body.light .theme-toggle{color:#0b63b0}
+body.light footer{background:rgba(255,255,255,.6)}
+/* ===== PRO VERSION LOGIN ===== */
+.prologin{position:fixed;top:14px;right:14px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:8px;font-family:'Cairo',sans-serif}
+.pro-btn{cursor:pointer;display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,#ffd35c,#ff9f1c);border:1px solid rgba(255,211,92,.7);color:#2a1800;border-radius:999px;padding:8px 14px;font-weight:800;font-size:13px;box-shadow:0 0 20px rgba(255,211,92,.45);transition:.25s}
+.pro-btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(255,211,92,.7)}
+.pro-btn .fr{font-family:'Orbitron',sans-serif;font-size:10px;opacity:.85}
+.pro-badge{display:none;align-items:center;gap:7px;background:linear-gradient(135deg,#1ddb7a,#0fae5e);border:1px solid rgba(29,219,122,.7);color:#042814;border-radius:999px;padding:8px 14px;font-weight:900;font-size:13px;box-shadow:0 0 22px rgba(29,219,122,.55);animation:pulseGlow 3s ease-in-out infinite}
+.pro-badge .fr{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:600;opacity:.9}
+.pro-panel{display:none;flex-direction:column;gap:10px;width:260px;background:linear-gradient(135deg,rgba(25,231,255,.12),rgba(10,15,40,.92));border:1px solid rgba(255,211,92,.5);border-radius:16px;padding:16px;box-shadow:0 10px 40px rgba(0,0,0,.5);backdrop-filter:blur(10px)}
+.pro-panel.open{display:flex;animation:fadeIn .3s ease}
+.pro-title{color:#ffd35c;font-size:14px;font-weight:800;text-align:center;line-height:1.5}
+.pro-title small{display:block;font-family:'Orbitron',sans-serif;font-size:9px;color:#9fd9ff;font-weight:400;margin-top:3px}
+.pro-inp{width:100%;box-sizing:border-box;padding:10px 12px;border-radius:10px;border:1px solid rgba(25,231,255,.4);background:rgba(5,12,30,.7);color:#fff;font-family:'Cairo';font-size:14px;outline:none;text-align:right}
+.pro-inp:focus{border-color:#ffd35c;box-shadow:0 0 10px rgba(255,211,92,.3)}
+.pro-submit{cursor:pointer;border:none;border-radius:10px;padding:11px;font-family:'Cairo';font-size:15px;font-weight:800;color:#2a1800;background:linear-gradient(135deg,#ffd35c,#ff9f1c);box-shadow:0 4px 14px rgba(255,211,92,.4);transition:.2s}
+.pro-submit:hover{transform:translateY(-2px)}
+.pro-msg{font-size:12.5px;text-align:center;line-height:1.6;min-height:1px}
+.pro-msg.ok{color:#5effa8;font-weight:800}
+.pro-msg.err{color:#ff8aa0;font-weight:700}
+@media(max-width:560px){.pro-panel{width:220px}.pro-btn,.pro-badge{font-size:12px;padding:7px 11px}}
+/* ===== DEV MODE + AI CHAT ===== */
+.dev-btn{cursor:pointer;display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#7a5cff,#4a2cff);border:1px solid rgba(150,120,255,.7);color:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:12px;font-family:'Orbitron',sans-serif;box-shadow:0 0 20px rgba(120,90,255,.5);transition:.25s}
+.dev-btn:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(120,90,255,.85)}
+.devops-btn{cursor:pointer;display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#ff2d4d,#b00020);border:1px solid rgba(255,80,100,.85);color:#fff;border-radius:999px;padding:8px 14px;font-weight:800;font-size:12px;font-family:'Cairo',sans-serif;box-shadow:0 0 22px rgba(255,45,77,.6);transition:.25s;animation:dangerPulse 1.8s ease-in-out infinite}
+.devops-btn:hover{transform:translateY(-2px);box-shadow:0 0 34px rgba(255,45,77,.95)}
+@keyframes dangerPulse{0%,100%{box-shadow:0 0 16px rgba(255,45,77,.45)}50%{box-shadow:0 0 30px rgba(255,45,77,.95)}}
+.devops-panel{display:none;flex-direction:column;gap:10px;width:285px;background:linear-gradient(135deg,rgba(60,0,10,.96),rgba(18,0,5,.97));border:1.5px solid rgba(255,60,80,.7);border-radius:16px;padding:16px;box-shadow:0 10px 40px rgba(180,0,20,.5);backdrop-filter:blur(10px)}
+.devops-panel.open{display:flex;animation:fadeIn .3s ease}
+.devops-title{color:#ff6b7f;font-size:14px;font-weight:900;text-align:center;line-height:1.5;text-shadow:0 0 10px rgba(255,45,77,.6)}
+.devops-title small{display:block;font-family:'Orbitron',sans-serif;font-size:9px;color:#ffb3bd;font-weight:400;margin-top:3px}
+.devops-warn{font-size:11px;color:#ffb3bd;text-align:center;line-height:1.6;background:rgba(255,45,77,.12);border:1px dashed rgba(255,80,100,.5);border-radius:10px;padding:8px}
+.devops-inp{width:100%;box-sizing:border-box;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,60,80,.5);background:rgba(20,0,5,.7);color:#fff;font-family:'Cairo';font-size:14px;outline:none;text-align:center;letter-spacing:2px}
+.devops-inp:focus{border-color:#ff2d4d;box-shadow:0 0 10px rgba(255,45,77,.4)}
+.devops-submit{cursor:pointer;border:none;border-radius:10px;padding:11px;font-family:'Cairo';font-size:15px;font-weight:800;color:#fff;background:linear-gradient(135deg,#ff2d4d,#b00020);box-shadow:0 4px 14px rgba(255,45,77,.4);transition:.2s}
+.devops-submit:hover{transform:translateY(-2px)}
+.devops-msg{font-size:12px;text-align:center;line-height:1.6;color:#ff8aa0;min-height:1px}
+.devops-stats{display:none;flex-direction:column;gap:8px}
+.devops-stats.show{display:flex;animation:fadeIn .3s ease}
+.devops-stat{background:rgba(255,45,77,.1);border:1px solid rgba(255,80,100,.4);border-radius:10px;padding:10px 12px;color:#ffd0d6;font-size:13px}
+.devops-stat b{color:#ff6b7f;font-family:'Orbitron',sans-serif}
+.devops-log{max-height:150px;overflow-y:auto;background:rgba(10,0,3,.6);border:1px solid rgba(255,60,80,.3);border-radius:10px;padding:8px;font-size:11.5px;color:#ffc2ca;line-height:1.7;margin-top:6px;text-align:right}
+.devops-log .row{border-bottom:1px dashed rgba(255,80,100,.2);padding:3px 0}
+.dev-hero{text-align:center;padding:26px 18px;border-radius:20px;background:linear-gradient(135deg,rgba(120,90,255,.18),rgba(10,15,40,.6));border:1px solid rgba(150,120,255,.5);margin-bottom:22px}
+.dev-hero .big{font-size:clamp(18px,3.6vw,30px);font-weight:900;color:#c7b8ff;text-shadow:0 0 20px rgba(120,90,255,.5);line-height:1.5}
+.dev-hero .fr{color:#a99fff;font-family:'Orbitron';letter-spacing:1px;margin-top:8px;font-size:clamp(9px,1.8vw,12px)}
+.ai-wrap{max-width:720px;margin:0 auto;border:1px solid rgba(150,120,255,.45);border-radius:20px;background:rgba(8,10,30,.55);overflow:hidden;box-shadow:0 0 30px rgba(120,90,255,.2)}
+.ai-head{padding:14px 18px;background:linear-gradient(135deg,rgba(120,90,255,.25),rgba(10,15,40,.4));font-weight:800;color:#d8ccff;border-bottom:1px solid rgba(150,120,255,.35);display:flex;flex-direction:column;gap:3px}
+.ai-head span{font-family:'Orbitron';font-size:10px;color:#a99fff;font-weight:400;direction:ltr}
+.ai-chat{height:400px;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+.ai-chat .msg{max-width:84%;padding:11px 14px;border-radius:14px;font-size:14px;line-height:1.75;white-space:pre-wrap;word-wrap:break-word}
+.ai-chat .msg.bot{align-self:flex-start;background:rgba(120,90,255,.15);border:1px solid rgba(150,120,255,.4);color:#eae3ff;border-bottom-right-radius:4px}
+.ai-chat .msg.user{align-self:flex-end;background:linear-gradient(135deg,#1ddb7a,#0fae5e);color:#042814;font-weight:700;border-bottom-left-radius:4px}
+.ai-chat .msg.bot b{color:#c7b8ff}
+.ai-chat .msg.bot u{color:#ffd35c;text-decoration:none;font-weight:800}
+.ai-input{display:flex;gap:10px;padding:14px 16px;border-top:1px solid rgba(150,120,255,.35);background:rgba(5,8,24,.5)}
+.ai-inp{flex:1;padding:12px 14px;border-radius:12px;border:1px solid rgba(150,120,255,.45);background:rgba(5,12,30,.7);color:#fff;font-family:'Cairo';font-size:15px;outline:none}
+.ai-inp:focus{border-color:#9a7cff;box-shadow:0 0 12px rgba(120,90,255,.3)}
+.ai-send{cursor:pointer;border:none;border-radius:12px;padding:12px 20px;font-family:'Cairo';font-weight:800;font-size:15px;color:#fff;background:linear-gradient(135deg,#7a5cff,#4a2cff);transition:.2s}
+.ai-send:hover{transform:translateY(-2px)}
+@media(max-width:560px){.ai-chat{height:340px}.ai-chat .msg{max-width:92%}}
+
+/* ============================================================
+   1) LOADER — شاشة التحميل الاحترافية
+   ============================================================ */
+#loader{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  background:radial-gradient(1200px 800px at 80% -10%,#15205c 0,transparent 60%),radial-gradient(1000px 700px at 0% 110%,#06302a 0,transparent 55%),linear-gradient(160deg,var(--bg),var(--bg2));
+  transition:opacity .6s ease,visibility .6s ease}
+#loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+#loader .ld-emblem{width:120px;height:134px;filter:drop-shadow(0 0 18px rgba(29,219,122,.6));animation:ldPulse 1.8s ease-in-out infinite}
+@keyframes ldPulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 12px rgba(29,219,122,.45))}50%{transform:scale(1.06);filter:drop-shadow(0 0 26px rgba(29,219,122,.85))}}
+#loader .ld-title{font-family:'Cairo';font-size:clamp(18px,4vw,26px);font-weight:900;text-align:center;background:linear-gradient(90deg,#fff,#ffd35c,#1ddb7a,#fff);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shine 4s linear infinite}
+#loader .ld-sub{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:#9fd9ff}
+#loader .ld-bar{width:220px;height:6px;border-radius:6px;background:rgba(25,231,255,.15);overflow:hidden}
+#loader .ld-bar i{display:block;height:100%;width:40%;border-radius:6px;background:linear-gradient(90deg,var(--cyan),var(--green));animation:ldLoad 1.3s ease-in-out infinite}
+@keyframes ldLoad{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
+
+/* ============================================================
+   2) LANGUAGE TOGGLE — زر تبديل اللغة
+   ============================================================ */
+.lang-toggle{position:fixed;top:60px;left:14px;z-index:60;display:flex;align-items:center;gap:6px;cursor:pointer;
+  padding:7px 12px;border-radius:30px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(10px);
+  color:#eaf4ff;font-family:'Cairo';font-weight:800;font-size:13px;box-shadow:0 0 18px rgba(25,231,255,.18);transition:transform .2s,box-shadow .2s}
+.lang-toggle:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(25,231,255,.3)}
+.lang-toggle .flag{font-size:16px}
+.lang-toggle .lbl{min-width:46px;text-align:center}
+/* عند تفعيل الوضع الفرنسي: إظهار نصوص FR وإخفاء نصوص AR الثنائية */
+body.lang-fr .navbtn .ar,body.lang-fr .pro-btn .ar,body.lang-fr .pro-badge .ar{display:none}
+body.lang-fr .navbtn .fr,body.lang-fr .subject h3 .fr{font-size:16px;opacity:1}
+body.lang-fr{direction:ltr}
+body.lang-fr .wrap,body.lang-fr section{direction:rtl}
+
+/* ============================================================
+   3) SEARCH BAR — شريط البحث عن التخصصات
+   ============================================================ */
+.search-wrap{max-width:560px;margin:26px auto 4px;position:relative}
+.search-box{display:flex;align-items:center;gap:10px;padding:13px 16px;border-radius:16px;
+  background:rgba(5,12,30,.6);border:1px solid rgba(25,231,255,.4);box-shadow:0 0 22px rgba(25,231,255,.12);transition:border-color .2s,box-shadow .2s}
+.search-box:focus-within{border-color:var(--cyan);box-shadow:0 0 18px rgba(25,231,255,.35)}
+.search-box .si{font-size:20px;color:var(--cyan)}
+.search-box input{flex:1;border:none;outline:none;background:transparent;color:#fff;font-family:'Cairo';font-size:15px}
+.search-box input::placeholder{color:#7fa6c9}
+.search-box .clr{cursor:pointer;border:none;background:transparent;color:#9fd9ff;font-size:18px;display:none}
+.search-box .clr.show{display:block}
+.search-results{margin:12px auto 0;max-width:560px;display:flex;flex-direction:column;gap:8px}
+.search-results .sr-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;cursor:pointer;
+  background:rgba(5,12,30,.55);border:1px solid rgba(25,231,255,.25);color:#eaf4ff;transition:transform .15s,border-color .2s}
+.search-results .sr-item:hover{transform:translateY(-2px);border-color:var(--cyan)}
+.search-results .sr-item .emo{font-size:20px}
+.search-results .sr-item .txt{display:flex;flex-direction:column;flex:1}
+.search-results .sr-item .txt b{font-size:14px}
+.search-results .sr-item .txt small{color:#9fd9ff;font-family:'Orbitron';font-size:10px;direction:ltr}
+.search-results .sr-item .sec-tag{font-size:10px;color:#042814;background:var(--green);padding:3px 8px;border-radius:20px;font-weight:800}
+.search-results .sr-empty{text-align:center;color:#9fd9ff;padding:14px;font-size:13px}
+</style></head>
+<body>
+<!-- ========== 1) LOADER — شاشة التحميل ========== -->
+<div id="loader">
+  <svg class="ld-emblem" viewBox="0 0 100 112" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="ldg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe27a"/><stop offset="1" stop-color="#d4a017"/></linearGradient></defs>
+    <path d="M50 4 L58 16 L72 12 L70 27 Q86 34 86 52 Q86 86 50 108 Q14 86 14 52 Q14 34 30 27 L28 12 L42 16 Z" fill="rgba(10,30,20,.55)" stroke="url(#ldg1)" stroke-width="3"/>
+    <polygon points="50,34 55.9,51.8 74.5,51.8 59.3,62.8 65.2,80.6 50,69.6 34.8,80.6 40.7,62.8 25.5,51.8 44.1,51.8" fill="none" stroke="#1ddb7a" stroke-width="3.5" stroke-linejoin="round"/>
+  </svg>
+  <div class="ld-title">المدرسة الرائدة · العرائش</div>
+  <div class="ld-sub">ÉCOLE PIONNIÈRE · LARACHE</div>
+  <div class="ld-bar"><i></i></div>
+</div>
+
+<!-- ========== 2) LANGUAGE TOGGLE — زر تبديل اللغة ========== -->
+<div class="lang-toggle" id="langToggle" onclick="toggleLang()" title="تبديل اللغة / Changer la langue">
+  <span class="flag" id="langFlag">🇲🇦</span>
+  <span class="lbl" id="langLbl">عربية</span>
+</div>
+<div class="theme-toggle" onclick="toggleTheme()" title="تبديل الوضع الليلي / النهاري">
+  <span class="ic" id="themeIcon">🌙</span>
+  <div class="sw"></div>
+  <span id="themeTxt">NIGHT</span>
+</div>
+<!-- PRO VERSION LOGIN (top-right) -->
+<div class="prologin">
+  <button class="pro-btn" id="proBtn">🔓 <span class="ar">تسجيل الدخول لنسخة البرو</span> <span class="fr">Pro</span></button>
+  <div class="pro-badge" id="proBadge">⭐ <span class="ar">نسخة البرو</span> <span class="fr">Version Pro</span></div>
+  <button class="dev-btn" id="devBtn">👨‍💻 Mode Développeurs</button>
+  <button class="devops-btn" id="devopsBtn">🛡️ للمطورين فقط</button>
+  <div class="devops-panel" id="devopsPanel">
+    <div class="devops-title">⛔ منطقة المطورين فقط<small>Espace Développeurs · Accès restreint</small></div>
+    <div class="devops-warn">⚠️ خانة محمية خاصة بالمطورين فقط — الدخول غير المصرّح به ممنوع.</div>
+    <input class="devops-inp" id="devopsCode" type="password" autocomplete="off" placeholder="🔒 الرمز السري">
+    <button class="devops-submit" id="devopsSubmit">فتح · Accéder</button>
+    <div class="devops-msg" id="devopsMsg"></div>
+    <div class="devops-stats" id="devopsStats">
+      <div class="devops-title" style="font-size:12px">📊 إحصائيات الزوار · Statistiques</div>
+      <div class="devops-stat">👥 إجمالي الزيارات (كل الزوار عبر الأنترنت):<br><b id="devopsTotal" style="font-size:20px">…</b></div>
+      <div class="devops-stat">💻 الزيارات من هذا الجهاز: <b id="devopsLocal" style="font-size:16px">0</b></div>
+      <div class="devops-stat">📝 سجل آخر الدخول والأسماء:
+        <div class="devops-log" id="devopsLogList"></div>
+      </div>
+    </div>
+  </div>
+  <div class="pro-panel" id="proPanel">
+    <div class="pro-title">🔐 تسجيل الدخول إلى نسخة البرو<small>Connexion à la version Pro</small></div>
+    <input class="pro-inp" id="proEmail" type="text" autocomplete="off" placeholder="📧 البريد / Email">
+    <input class="pro-inp" id="proPass" type="password" autocomplete="off" placeholder="🔑 رمز الدخول / Code">
+    <button class="pro-submit" id="proSubmit">دخول · Se connecter</button>
+    <div class="pro-msg" id="proMsg"></div>
+  </div>
+</div>
+<div class="stars"></div><div class="stars2"></div>
+<div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
+
+<div class="wrap">
+
+  <!-- KINGDOM TOP -->
+  <div class="kingdom">
+    <svg class="emblem" viewBox="0 0 100 112" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffe27a"/><stop offset="1" stop-color="#d4a017"/></linearGradient></defs>
+      <path d="M50 4 L58 16 L72 12 L70 27 Q86 34 86 52 Q86 86 50 108 Q14 86 14 52 Q14 34 30 27 L28 12 L42 16 Z" fill="rgba(10,30,20,.55)" stroke="url(#g1)" stroke-width="3"/>
+      <polygon points="50,34 55.9,51.8 74.5,51.8 59.3,62.8 65.2,80.6 50,69.6 34.8,80.6 40.7,62.8 25.5,51.8 44.1,51.8" fill="none" stroke="#1ddb7a" stroke-width="3.5" stroke-linejoin="round"/>
+    </svg>
+    <h1>وزارة التربية الوطنية والتعليم الأولي والرياضة</h1>
+    <div class="fr">MINISTÈRE DE L'ÉDUCATION NATIONALE</div>
+    <div class="flagline"></div>
+  </div>
+
+  <!-- HOME -->
+  <section id="home" class="active">
+    <!-- MASSAR -->
+    <div class="massar">
+      <button class="massar-head" onclick="toggleMassar()">
+        <span class="ic">🎓</span>
+        <span class="tx"><span class="ar">منظومة مسار متمدرس</span><span class="fr">SYSTÈME MASSAR · ESPACE ÉLÈVE</span></span>
+        <span class="arrow" id="massarArrow">▾</span>
+      </button>
+      <div class="massar-body" id="massarBody">
+        <label class="mlbl">رمز مسار · Code Massar</label>
+        <input id="massarCode" class="minp" type="text" placeholder="مثال · R130000000" autocomplete="off">
+        <label class="mlbl">كلمة السر · Mot de passe</label>
+        <input id="massarPass" class="minp" type="password" placeholder="••••••••" autocomplete="off">
+        <button class="massar-login" onclick="goMassar()">🔓 الدخول · Connexion</button>
+        <p class="mnote">يتم نقلك إلى الموقع الرسمي لمنظومة مسار لإتمام تسجيل الدخول بأمان.</p>
+        <div class="qlinks-wrap">
+          <div class="qlinks-title">🔗 روابط سريعة · مواقع الوزارة</div>
+          <div class="qlinks">
+            <a class="qlink" href="https://www.men.gov.ma" target="_blank" rel="noopener"><span class="qi">🏛️</span><span class="qt">الموقع الرسمي للوزارة<small>men.gov.ma</small></span></a>
+            <a class="qlink" href="https://telmidtice.men.gov.ma" target="_blank" rel="noopener"><span class="qi">📺</span><span class="qt">TelmidTICE · الدروس المصورة<small>telmidtice.men.gov.ma</small></span></a>
+            <a class="qlink" href="https://massarservice.men.gov.ma" target="_blank" rel="noopener"><span class="qi">🎓</span><span class="qt">مسار · خدمات المواطن<small>massarservice.men.gov.ma</small></span></a>
+            <a class="qlink" href="https://taalimtice.men.gov.ma" target="_blank" rel="noopener"><span class="qi">💻</span><span class="qt">تعليم TICE · الموارد الرقمية<small>taalimtice.men.gov.ma</small></span></a>
+            <a class="qlink" href="https://www.tawjihnet.net" target="_blank" rel="noopener"><span class="qi">🧩</span><span class="qt">التوجيه المدرسي والجامعي<small>tawjihnet.net</small></span></a>
+            <a class="qlink" href="https://moutamadris.men.gov.ma" target="_blank" rel="noopener"><span class="qi">🎒</span><span class="qt">فضاء التلميذ · Moutamadris<small>moutamadris.men.gov.ma</small></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="title">منصة التعلم الرقمي</div>
+      <div class="sub">بوابة دروس التعليم الابتدائي · Plateforme d'Apprentissage Numérique 2034</div>
+    </div>
+
+    <!-- ========== 3) SEARCH BAR — شريط البحث عن التخصصات ========== -->
+    <div class="search-wrap">
+      <div class="search-box">
+        <span class="si">🔍</span>
+        <input id="searchInput" type="text" autocomplete="off"
+               placeholder="ابحث عن مادة أو تخصص… / Rechercher une matière ou filière…"
+               oninput="runSearch(this.value)">
+        <button class="clr" id="searchClr" onclick="clearSearch()" title="مسح">✕</button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+    <div class="badge-row">
+      <div class="id-badge"><div class="role">DEVELOPER</div><div class="nm">Adam Tariq — آدم طارق</div><div class="frn">المطوّر والمشرف العام</div></div>
+      <div class="id-badge assist"><div class="role">ASSISTANT</div><div class="nm">Professeur Ismaël</div><div class="frn">الأستاذ إسماعيل · المساعد</div></div>
+    </div>
+    <div class="btn-grid">
+      <button class="navbtn pio" onclick="go('pionniere')"><span class="ic">🏫</span><span class="ar">المدرسة الرائدة</span><span class="fr">ÉCOLE PIONNIÈRE · LARACHE</span></button>
+      <button class="navbtn lyc" onclick="go('lycee')"><span class="ic">🏛️</span><span class="ar">الثانوية التأهيلية</span><span class="fr">LYCÉE · OPTION FRANÇAISE</span></button>
+      <button class="navbtn uni" onclick="go('universite')"><span class="ic">🎓🌐</span><span class="ar">الجامعة</span><span class="fr">UNIVERSITÉ · FILIÈRES & SPÉCIALITÉS</span></button>
+      <button class="navbtn pri" onclick="go('privee')"><span class="ic">🎓</span><span class="ar">المدرسة الخصوصية</span><span class="fr">ÉCOLE PRIVÉE</span></button>
+      <button class="navbtn ofp" onclick="go('ofppt')"><span class="ic">🛠️💼</span><span class="ar">التكوين المهني</span><span class="fr">FORMATION PROFESSIONNELLE · OFPPT</span></button>
+      <button class="navbtn cyb" onclick="goCyber()"><span class="ic">🛡️🔒</span><span class="ar">خاص بطلاب الأمن السيبراني</span><span class="fr">RÉSERVÉ · CYBERSÉCURITÉ</span></button>
+    </div>
+  </section>
+
+  <!-- PIONNIERE -->
+  <section id="pionniere">
+    <div class="sec-head">
+      <div><h2>المدرسة الرائدة <span style="font-size:14px;color:#9fd9ff;font-family:Orbitron">École Pionnière</span></h2><div class="city">📍 بمدينة العرائش · الابتدائي والإعدادي</div></div>
+      <button class="back" onclick="go('home')">← الرئيسية / Accueil</button>
+    </div>
+    <div class="cats" id="cats-pionniere"></div>
+    <div class="tabs" id="tabs-pionniere"></div>
+    <div id="content-pionniere"></div>
+  </section>
+
+  <!-- LYCEE -->
+  <section id="lycee">
+    <div class="sec-head">
+      <div><h2>الثانوية التأهيلية <span style="font-size:14px;color:#9fd9ff;font-family:Orbitron">Lycée</span></h2><div class="city">🎓 الجذع المشترك · الأولى والثانية باك · خيار فرنسي</div></div>
+      <button class="back" onclick="go('home')">← الرئيسية / Accueil</button>
+    </div>
+    <div class="cats" id="cats-lycee"></div>
+    <div class="tabs" id="tabs-lycee"></div>
+    <div id="content-lycee"></div>
+  </section>
+
+  <!-- UNIVERSITE -->
+  <section id="universite">
+    <div class="sec-head">
+      <div><h2>الجامعة <span style="font-size:14px;color:#9fd9ff;font-family:Orbitron">Université · Filières</span></h2><div class="city">🎓 التخصصات الجامعية بالمغرب · وجامعتا ULB و KU Leuven ببلجيكا</div></div>
+      <button class="back" onclick="go('home')">← الرئيسية / Accueil</button>
+    </div>
+    <p class="uni-note">👇 اضغط على أي خانة لتظهر لك التخصصات (البرونشات) التي تُدرس داخلها. تخصص <b style="color:#ff6b86">الأمن السيبيراني</b> مميّز باللون الأحمر للدلالة على الخطر والحساسية.</p>
+    <div class="subject"><h3>💻 علوم الحاسوب والرقميات <span class="fr">Informatique & Numérique</span></h3><div class="lessons">
+      <div class="uni-item">علوم الحاسوب<small>Computer Science</small></div>
+      <div class="uni-item">هندسة البرمجيات<small>Software Engineering</small></div>
+      <div class="uni-item">الشبكات والاتصالات<small>Networks & Telecom</small></div>
+      <div class="uni-item">الذكاء الاصطناعي وعلم البيانات<small>AI & Data Science</small></div>
+      <div class="uni-item">تطوير الويب والتطبيقات<small>Web & Mobile Dev</small></div>
+      <div class="uni-item">نظم المعلومات<small>Information Systems</small></div>
+      <div class="uni-item">الحوسبة السحابية<small>Cloud Computing</small></div>
+      <div class="uni-item danger">🔒 الأمن السيبيراني<small>⚠️ Cybersecurity</small></div>
+    </div></div>
+    <div class="subject"><h3>🔬 العلوم والتقنيات <span class="fr">Sciences & Techniques</span></h3><div class="lessons">
+      <div class="uni-item">الرياضيات<small>Mathématiques</small></div>
+      <div class="uni-item">الفيزياء<small>Physique</small></div>
+      <div class="uni-item">الكيمياء<small>Chimie</small></div>
+      <div class="uni-item">علوم الحياة<small>Biologie</small></div>
+      <div class="uni-item">علوم الأرض والجيولوجيا<small>Géologie</small></div>
+      <div class="uni-item">علوم المواد<small>Sciences des Matériaux</small></div>
+      <div class="uni-item">الإحصاء التطبيقي<small>Statistiques</small></div>
+    </div></div>
+    <div class="subject"><h3>⚙️ العلوم المهندسة <span class="fr">Écoles d'Ingénieurs</span></h3><div class="lessons">
+      <div class="uni-item">الهندسة المدنية<small>Génie Civil</small></div>
+      <div class="uni-item">الهندسة الكهربائية<small>Génie Électrique</small></div>
+      <div class="uni-item">الهندسة الميكانيكية<small>Génie Mécanique</small></div>
+      <div class="uni-item">الهندسة الصناعية<small>Génie Industriel</small></div>
+      <div class="uni-item">الهندسة المعلوماتية<small>Génie Informatique</small></div>
+      <div class="uni-item">الطاقات المتجددة<small>Énergies Renouvelables</small></div>
+      <div class="uni-item danger">🔒 أمن المعلومات والأنظمة<small>⚠️ Information Security · ENSIAS/INPT</small></div>
+    </div></div>
+    <div class="subject"><h3>🩺 الطب والصحة <span class="fr">Médecine & Santé</span></h3><div class="lessons">
+      <div class="uni-item">الطب العام<small>Médecine</small></div>
+      <div class="uni-item">طب الأسنان<small>Médecine Dentaire</small></div>
+      <div class="uni-item">الصيدلة<small>Pharmacie</small></div>
+      <div class="uni-item">التمريض<small>Soins Infirmiers</small></div>
+      <div class="uni-item">القبالة<small>Sage-femme</small></div>
+      <div class="uni-item">العلاج الطبيعي<small>Kinésithérapie</small></div>
+    </div></div>
+    <div class="subject"><h3>💼 الاقتصاد والتدبير والتجارة <span class="fr">Économie & Gestion</span></h3><div class="lessons">
+      <div class="uni-item">الاقتصاد<small>Économie</small></div>
+      <div class="uni-item">التدبير<small>Gestion / Management</small></div>
+      <div class="uni-item">المحاسبة والمالية<small>Comptabilité & Finance</small></div>
+      <div class="uni-item">التسويق<small>Marketing</small></div>
+      <div class="uni-item">التجارة الدولية<small>Commerce International</small></div>
+      <div class="uni-item">البنوك والتأمين<small>Banque & Assurance</small></div>
+      <div class="uni-item">ريادة الأعمال<small>Entrepreneuriat</small></div>
+    </div></div>
+    <div class="subject"><h3>⚖️ الحقوق والعلوم السياسية <span class="fr">Droit & Sc. Politiques</span></h3><div class="lessons">
+      <div class="uni-item">القانون الخاص<small>Droit Privé</small></div>
+      <div class="uni-item">القانون العام<small>Droit Public</small></div>
+      <div class="uni-item">العلوم السياسية<small>Sciences Politiques</small></div>
+      <div class="uni-item">العلاقات الدولية<small>Relations Internationales</small></div>
+    </div></div>
+    <div class="subject"><h3>📖 الآداب واللغات والعلوم الإنسانية <span class="fr">Lettres & Sciences Humaines</span></h3><div class="lessons">
+      <div class="uni-item">الأدب العربي<small>Littérature Arabe</small></div>
+      <div class="uni-item">اللغة الفرنسية<small>Études Françaises</small></div>
+      <div class="uni-item">اللغة الإنجليزية<small>English Studies</small></div>
+      <div class="uni-item">اللغة الإسبانية<small>Études Hispaniques</small></div>
+      <div class="uni-item">الترجمة<small>Traduction</small></div>
+      <div class="uni-item">التاريخ والجغرافيا<small>Histoire-Géographie</small></div>
+      <div class="uni-item">الفلسفة<small>Philosophie</small></div>
+      <div class="uni-item">علم الاجتماع<small>Sociologie</small></div>
+      <div class="uni-item">علم النفس<small>Psychologie</small></div>
+    </div></div>
+    <div class="subject"><h3>🏛️ أبرز الجامعات المغربية <span class="fr">Universités Marocaines</span></h3><div class="lessons">
+      <div class="uni-item">جامعة محمد الخامس<small>Rabat</small></div>
+      <div class="uni-item">جامعة الحسن الثاني<small>Casablanca</small></div>
+      <div class="uni-item">جامعة القرويين<small>Fès</small></div>
+      <div class="uni-item">جامعة سيدي محمد بن عبد الله<small>Fès</small></div>
+      <div class="uni-item">جامعة القاضي عياض<small>Marrakech</small></div>
+      <div class="uni-item">جامعة ابن زهر<small>Agadir</small></div>
+      <div class="uni-item">جامعة عبد المالك السعدي<small>Tétouan</small></div>
+      <div class="uni-item">جامعة ابن طفيل<small>Kénitra</small></div>
+      <div class="uni-item danger">🔒 ENSIAS · مدرسة الأمن المعلوماتي<small>⚠️ Cybersecurity · Rabat</small></div>
+    </div></div>
+    <div class="subject"><h3>🇧🇪 جامعة ULB <span class="fr">Université Libre de Bruxelles · Belgique</span></h3><div class="lessons">
+      <div class="uni-item">العلوم (معلوميات، رياضيات، فيزياء)<small>Faculté des Sciences</small></div>
+      <div class="uni-item">المدرسة البوليتقنية (هندسة)<small>École Polytechnique</small></div>
+      <div class="uni-item">الطب<small>Faculté de Médecine</small></div>
+      <div class="uni-item">الحقوق<small>Droit & Criminologie</small></div>
+      <div class="uni-item">الاقتصاد والتدبير<small>Solvay · Éco & Gestion</small></div>
+      <div class="uni-item">الفلسفة والعلوم الاجتماعية<small>Philo & Sc. Sociales</small></div>
+      <div class="uni-item">الآداب والترجمة<small>Lettres & Traduction</small></div>
+      <div class="uni-item danger">🔒 ماستر الأمن السيبيراني<small>⚠️ Master in Cybersecurity</small></div>
+    </div></div>
+    <div class="subject"><h3>🇧🇪 جامعة KU Leuven <span class="fr">Katholieke Universiteit Leuven · Bruxelles/Leuven</span></h3><div class="lessons">
+      <div class="uni-item">العلوم المهندسة<small>Engineering Science</small></div>
+      <div class="uni-item">تكنولوجيا الهندسة<small>Engineering Technology</small></div>
+      <div class="uni-item">علوم الحاسوب<small>Computer Science</small></div>
+      <div class="uni-item">الطب وعلوم الحياة<small>Medicine & Life Sciences</small></div>
+      <div class="uni-item">الحقوق<small>Law</small></div>
+      <div class="uni-item">الاقتصاد والأعمال<small>Economics & Business</small></div>
+      <div class="uni-item">الآداب<small>Arts & Humanities</small></div>
+      <div class="uni-item danger">🔒 ماستر الأمن السيبيراني · COSIC<small>⚠️ Master of Cybersecurity · مجموعة COSIC العالمية للتشفير</small></div>
+    </div></div>
+  </section>
+
+  <!-- PRIVEE -->
+  <section id="privee">
+    <div class="sec-head">
+      <div><h2>المدرسة الخصوصية <span style="font-size:14px;color:#9fd9ff;font-family:Orbitron">École Privée</span></h2><div class="city">📚 من الأول ابتدائي إلى الثانية باكالوريا · Du primaire au Bac</div></div>
+      <button class="back" onclick="go('home')">← الرئيسية / Accueil</button>
+    </div>
+    <div class="cats" id="cats-privee"></div>
+    <div class="tabs" id="tabs-privee"></div>
+    <div id="content-privee"></div>
+  </section>
+
+  <!-- OFPPT / FORMATION PROFESSIONNELLE -->
+  <section id="ofppt">
+    <div class="sec-head">
+      <div><h2>التكوين المهني <span style="font-size:14px;color:#9fd9ff;font-family:Orbitron">Formation Professionnelle</span></h2><div class="city">🛠️ الشعب والمستويات والوحدات · OFPPT</div></div>
+      <button class="back" onclick="go('home')">← الرئيسية / Accueil</button>
+    </div>
+    <div class="notice">
+      <div class="nt">🎓 ما هو التكوين المهني؟</div>
+      <div class="nd">التكوين المهني مسار يُكسِبك مهارة عملية وديبلوماً مهنياً جاهزاً لسوق الشغل. ينقسم إلى 4 مستويات: التخصص، التأهيل، التقني، والتقني المتخصص.
+      <span class="nf">4 niveaux · Spécialisation · Qualification · Technicien · Technicien Spécialisé</span></div>
+    </div>
+    <div class="cats" id="cats-ofppt"></div>
+    <div class="tabs" id="tabs-ofppt"></div>
+    <div id="content-ofppt"></div>
+  </section>
+
+  <!-- CYBER -->
+  <section id="cyber">
+    <div class="sec-head">
+      <div><h2 style="color:#ff6b86">الأمن السيبراني</h2></div>
+      <button class="back" onclick="go('home')">← الرئيسية / Accueil</button>
+    </div>
+    <div class="cyber-hero">
+      <div class="big">خاص بطلاب الأمن السيبراني</div>
+      <div class="fr">RÉSERVÉ AUX ÉTUDIANTS EN CYBERSÉCURITÉ</div>
+      <p style="margin-top:12px;color:#ffd7df;max-width:620px;margin-inline:auto">مسار تمهيدي للمبتدئين في عالم الأمن الرقمي · Un parcours d'initiation à la cybersécurité.</p>
+    </div>
+    <div id="content-cyber"></div>
+  </section>
+
+  <!-- DEV MODE -->
+  <section id="devmode">
+    <div class="sec-head">
+      <div><h2>وضع المطورين <span style="font-size:14px;color:#c7b8ff;font-family:Orbitron">Mode Développeurs</span></h2><div class="city">👨‍💻 للمطورين وخبراء الأمن السيبراني</div></div>
+      <button class="back" onclick="go('home')">← الرئيسية / Accueil</button>
+    </div>
+    <div class="dev-hero">
+      <div class="big">👨‍💻 مرحبا بالمطورين والمبرمجين وخبراء الأمن السيبراني</div>
+      <div class="fr">BIENVENUE AUX DÉVELOPPEURS, PROGRAMMEURS &amp; EXPERTS EN CYBERSÉCURITÉ</div>
+    </div>
+    <div class="ai-wrap">
+      <div class="ai-head">🤖 مساعد الذكاء الاصطناعي · ابنِ مستقبلك <span>Assistant IA · Construis ton avenir, étape par étape</span></div>
+      <div class="ai-chat" id="aiChat"></div>
+      <div class="ai-input">
+        <input id="aiInput" class="ai-inp" type="text" autocomplete="off" placeholder="اكتب جوابك هنا… / Écris ta réponse ici…">
+        <button id="aiSend" class="ai-send">إرسال ➤</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+  <footer>
+    <div class="mk">✨ صُنِع من طرف الخبير آدم طارق وفريق دعمه</div>
+    <div class="mkf">Réalisé par l'expert Adam Tariq et son équipe de support</div>
+    <div class="consult">
+      🔐 للاستشارة حول دراسة الأمن السيبراني للمبتدئين، المرجو التواصل مع الخبير آدم طارق عبر الواتساب.<br>
+      Pour toute consultation sur l'étude de la cybersécurité pour débutants, veuillez contacter l'expert Adam Tariq via WhatsApp.
+    </div>
+    <a class="wa" href="https://wa.me/34614981792" target="_blank" rel="noopener">💬 WhatsApp <small>+34 614 98 17 92</small></a>
+  </footer>
+
+<script>
+function go(id){document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+var MASSAR_URL="https://massarservice.men.gov.ma/moutamadris/";
+function toggleMassar(){document.querySelector('.massar').classList.toggle('open');}
+function goMassar(){window.open(MASSAR_URL,'_blank','noopener');}
+document.addEventListener('click',function(e){var h=e.target.closest?e.target.closest('.subject>h3'):null;if(h&&h.parentNode){h.parentNode.classList.toggle('open');}});
+var CYBER_PASS="3121645497870000";var cyberUnlocked=false;
+function goCyber(){if(cyberUnlocked){go('cyber');return;}var p=window.prompt("\uD83D\uDD12 هذا القسم محمي — المرجو إدخال كلمة السر\nSection protégée — Veuillez saisir le mot de passe :");if(p===null){return;}if(p.trim()===CYBER_PASS){cyberUnlocked=true;go('cyber');}else{alert("\u274C كلمة السر غير صحيحة\nMot de passe incorrect");}}
+function yt(q,kids){return 'https://www.youtube.com/results?search_query='+encodeURIComponent(q+(kids?' شرح للأطفال':' شرح الدرس كامل'));}
+function toggleTheme(){var b=document.body;b.classList.toggle('light');var l=b.classList.contains('light');document.getElementById('themeIcon').textContent=l?'☀️':'🌙';document.getElementById('themeTxt').textContent=l?'DAY':'NIGHT';}
+const LEVELS=['المستوى الأول|Niveau 1','المستوى الثاني|Niveau 2','المستوى الثالث|Niveau 3','المستوى الرابع|Niveau 4','المستوى الخامس|Niveau 5','المستوى السادس|Niveau 6'];
+const CURR={
+L1:{
+'اللغة العربية|Arabe|📖':[['الحروف الهجائية','نتعرف على حروف اللغة العربية وأشكالها ونطقها.'],['المد بالألف','نتعلم كيف نمد الصوت بالألف في الكلمات.'],['الكلمة والجملة','نركب الكلمات لتكوين جملة بسيطة ومفيدة.']],
+'الرياضيات|Maths|🔢':[['الأعداد من 0 إلى 9','نتعرف على الأعداد الأولى ونتعلم كتابتها وعدها.'],['المقارنة بين الأعداد','نقارن الأعداد باستعمال أكبر وأصغر ويساوي.'],['الجمع البسيط','نتعلم جمع عددين صغيرين بالرسم والأصابع.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les voyelles','نتعلم الحروف المتحركة a e i o u ونطقها.'],['Les salutations','تحيات بسيطة بالفرنسية: Bonjour, Merci, Au revoir.']],
+'النشاط العلمي|Sciences|🔬':[['الحواس الخمس','نكتشف حواسنا الخمس ودور كل واحدة منها.'],['أجزاء جسم الإنسان','نتعرف على الرأس والجذع والأطراف.'],['النباتات من حولنا','نلاحظ النباتات ونتعرف على حاجتها للماء والضوء.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['السور القصيرة','نحفظ سورتي الفاتحة والإخلاص بالترتيل.'],['آداب الطهارة','نتعلم النظافة والطهارة قبل الصلاة.']],
+'التربية الفنية|Arts|🎨':[['الألوان الأساسية','نتعرف على الألوان ونمزجها في رسوم ممتعة.']]
+},
+L2:{
+'اللغة العربية|Arabe|📖':[['الحروف المركبة','نقرأ كلمات فيها حروف متصلة ومركبة.'],['التنوين','نتعلم تنوين الفتح والضم والكسر.'],['الجملة المفيدة','نكوّن جملاً تعطي معنى تاماً.']],
+'الرياضيات|Maths|🔢':[['الأعداد إلى 99','نعد ونكتب الأعداد حتى تسعة وتسعين.'],['الطرح','نتعلم طرح الأعداد الصغيرة بطرق بسيطة.'],['الأشكال الهندسية','نتعرف على المربع والمثلث والدائرة.']],
+'اللغة الفرنسية|Français|🇫🇷':[['L\'alphabet','نحفظ الأبجدية الفرنسية كاملة.'],['La famille','مفردات العائلة: père, mère, frère, sœur.']],
+'النشاط العلمي|Sciences|🔬':[['الحيوانات الأليفة والبرية','نصنف الحيوانات حسب مكان عيشها.'],['دورة الماء','نتعرف كيف يتبخر الماء ويتساقط مطراً.'],['الفصول الأربعة','نكتشف خصائص كل فصل من السنة.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['الوضوء','نتعلم خطوات الوضوء الصحيح.'],['سور قصيرة','نحفظ سوراً جديدة من القرآن الكريم.']],
+'التربية الفنية|Arts|🎨':[['الرسم والتلوين','نعبّر عن أفكارنا بالرسم باستعمال الألوان.']]
+},
+L3:{
+'اللغة العربية|Arabe|📖':[['أنواع الجمل','نميز بين الجملة الاسمية والفعلية.'],['علامات الترقيم','نستعمل النقطة والفاصلة وعلامة الاستفهام.'],['القراءة المسترسلة','نقرأ نصوصاً قصيرة بطلاقة وفهم.']],
+'الرياضيات|Maths|🔢':[['الأعداد إلى 999','نقرأ ونكتب الأعداد حتى تسعمائة وتسعة وتسعين.'],['الضرب','نتعلم جدول الضرب والعملية.'],['القياس','نقيس الأطوال بالسنتيمتر والمتر.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Le présent','تصريف الأفعال في الحاضر.'],['Le dialogue','نقرأ ونمثل حواراً قصيراً.']],
+'النشاط العلمي|Sciences|🔬':[['التغذية السليمة','نتعرف على الأغذية المفيدة لصحتنا.'],['الهواء من حولنا','نكتشف خصائص الهواء وأهميته.'],['الكهرباء البسيطة','نركب دارة كهربائية لإضاءة مصباح.']],
+'الاجتماعيات|Sciences Sociales|🗺️':[['الخريطة','نتعلم قراءة خريطة بسيطة ورموزها.'],['قياس الزمن','نتعرف على الساعة والأيام والأشهر.'],['الأسرة والمجتمع','دور الأسرة في المجتمع.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['أركان الإسلام','نتعرف على الأركان الخمسة.'],['الصلاة','نتعلم كيفية أداء الصلاة.']]
+},
+L4:{
+'اللغة العربية|Arabe|📖':[['الفعل والاسم والحرف','نميز أقسام الكلام الثلاثة.'],['الفاعل والمفعول','نحدد الفاعل والمفعول به في الجملة.'],['التعبير الكتابي','نتعلم كتابة فقرة مترابطة.']],
+'الرياضيات|Maths|🔢':[['الكسور','نتعرف على الكسر والبسط والمقام.'],['القسمة','نتعلم عملية القسمة الإقليدية.'],['المحيط','نحسب محيط الأشكال الهندسية.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les temps','الماضي والحاضر والمستقبل.'],['La description','نصف شخصاً أو مكاناً بالفرنسية.']],
+'النشاط العلمي|Sciences|🔬':[['التنفس','نتعرف على جهاز التنفس وأهميته.'],['الطاقة','مصادر الطاقة واستعمالاتها.'],['النباتات الخضراء','دور الضوء في نمو النبات.']],
+'الاجتماعيات|Sciences Sociales|🗺️':[['موقع المغرب','نحدد موقع المغرب على الخريطة.'],['الموارد الطبيعية','ثروات بلادنا الطبيعية.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['الزكاة','معنى الزكاة وأهميتها الاجتماعية.'],['السيرة النبوية','محطات من حياة النبي صلى الله عليه وسلم.']]
+},
+L5:{
+'اللغة العربية|Arabe|📖':[['الجملة الاسمية والفعلية','نحلل نوع الجملة ومكوناتها.'],['الإعراب','مبادئ الإعراب والعلامات.'],['الإنشاء','نكتب موضوعاً إنشائياً منظماً.']],
+'الرياضيات|Maths|🔢':[['الأعداد العشرية','نتعرف على الفاصلة والأجزاء العشرية.'],['المساحة','نحسب مساحة المربع والمستطيل.'],['النسبة المئوية','مفهوم النسبة المئوية وحسابها.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Le récit','نقرأ ونكتب قصة قصيرة.'],['Compréhension','نفهم نصاً ونجيب عن أسئلة.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Alphabet & Numbers','الحروف والأعداد بالإنجليزية.'],['Greetings & Colors','التحيات والألوان بالإنجليزية.']],
+'النشاط العلمي|Sciences|🔬':[['الجهاز الهضمي','رحلة الغذاء داخل جسمنا.'],['الضوء','انتشار الضوء والظل.'],['الكواكب','نتعرف على النظام الشمسي.']],
+'الاجتماعيات|Sciences Sociales|🗺️':[['القارات','نتعرف على قارات العالم.'],['الحضارات القديمة','لمحة عن الحضارات الإنسانية.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['الحج','مناسك الحج ومعناها.'],['الأخلاق الحسنة','قيم الصدق والاحترام والتعاون.']]
+},
+L6:{
+'اللغة العربية|Arabe|📖':[['الإعراب المتقدم','نعرب جملاً متنوعة.'],['تحليل النصوص','نفهم النص ونستخرج أفكاره.'],['التلخيص','نلخص نصاً مع الحفاظ على المعنى.']],
+'الرياضيات|Maths|🔢':[['التناسب','التناسبية وحل المسائل.'],['الهندسة','الزوايا والمجسمات.'],['الأعداد الكبيرة','نقرأ ونكتب الملايين والملايير.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Production écrite','ننتج نصاً منظماً بالفرنسية.'],['Texte argumentatif','نعبّر عن رأينا بحجج.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Simple Present','زمن المضارع البسيط.'],['My School & Daily life','مفردات المدرسة والحياة اليومية.']],
+'النشاط العلمي|Sciences|🔬':[['التكاثر عند الكائنات','كيف تتكاثر النباتات والحيوانات.'],['البيئة وحمايتها','نتعلم المحافظة على البيئة.'],['الكهرباء والمغناطيس','ظواهر المغنطة والتيار.']],
+'الاجتماعيات|Sciences Sociales|🗺️':[['المغرب والعالم','علاقات المغرب الدولية.'],['التنمية المستدامة','نتعلم مفهوم التنمية والبيئة.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القرآن والتدبر','نتدبر معاني بعض الآيات.'],['حقوق الإنسان في الإسلام','قيم العدل والتسامح.']]
+}
+};
+const CYBER=[
+['ما هو الأمن السيبراني؟|Introduction à la cybersécurité','مقدمة مبسطة تشرح ماذا يعني الأمن الرقمي ولماذا هو مهم في حياتنا.'],
+['كلمات المرور القوية|Mots de passe sécurisés','نتعلم كيف ننشئ كلمات سر قوية ونحمي حساباتنا.'],
+['التصيد الإلكتروني|Le Phishing','نتعرف على رسائل الاحتيال وكيف نتجنبها.'],
+['حماية الخصوصية على الإنترنت|Protection de la vie privée','نتعلم حماية بياناتنا الشخصية على الشبكة.'],
+['أساسيات الشبكات|Bases des réseaux','مقدمة عن عمل الشبكات والإنترنت.'],
+['مقدمة في لينكس|Introduction à Linux','أول خطوات العمل مع نظام لينكس للمبتدئين.']
+];
+
+function detailExp(subj,title,desc){
+  var s=subj||''; var sl=s.toLowerCase(); var t=title||'الدرس';
+  var core='', steps=[], ex='', sum='';
+  if(s.indexOf('عربية')>-1||sl.indexOf('arabe')>-1){
+    core='«'+t+'» درس لغوي نفهمه بالملاحظة ثم القاعدة ثم التطبيق في جُمل من إنشائنا.';
+    steps=['نقرأ أمثلة تحتوي على ظاهرة «'+t+'» ونلاحظها جيداً','نستنتج القاعدة اللغوية ونفهم مكوّناتها وعلاماتها','نحفظ القاعدة بأمثلة محفوظة سهلة التذكّر','نطبّقها في تمارين: إعراب، تحويل، ملء الفراغ','ننتج جُملاً وفقرة صحيحة نوظّف فيها ما تعلّمناه'];
+    ex='مثال: نأخذ جملة ونطبّق عليها قاعدة «'+t+'» مع بيان الإعراب والسبب.';
+    sum='أتقنتَ الدرس عندما توظّف «'+t+'» بشكل صحيح في تعبيرك الكتابي والشفهي.';
+  } else if(s.indexOf('رياض')>-1||sl.indexOf('math')>-1){
+    core='«'+t+'» من دروس الرياضيات: نفهم التعريف أولاً، ثم القاعدة، ثم نحلّ تمارين متدرّجة من السهل إلى الصعب.';
+    steps=['نقرأ تعريف «'+t+'» ونفهم كل الرموز والمصطلحات فيه','نكتب القاعدة أو الخاصية الأساسية ونعرف متى تُستعمل','نطبّقها على مثال محلول بسيط خطوة بخطوة','نحلّ تمارين متدرّجة حتى يترسّخ الفهم والسرعة','نراجع الأخطاء الشائعة لتجنّبها في الفرض والامتحان'];
+    ex='مثال: نحلّ تمريناً نموذجياً حول «'+t+'» مبيّنين كل خطوة والسبب وراءها.';
+    sum='أتقنتَ «'+t+'» عندما تحلّ تمريناً جديداً وحدك دون مساعدة.';
+  } else if(s.indexOf('فرنس')>-1||sl.indexOf('fran')>-1){
+    core='«'+t+'» درس نتعلّمه بالاستماع والقراءة ثم التعبير الشفهي والكتابي بالفرنسية.';
+    steps=['نكتشف المفردات والعبارات الجديدة ونفهم معناها','نلاحظ القاعدة (grammaire/conjugaison) في أمثلة','نتدرّب على النطق والقراءة بصوت مرتفع','نطبّق في تمارين وحوارات قصيرة','ننتج نصاً أو فقرة قصيرة بالفرنسية'];
+    ex='Exemple: on prend une phrase et on applique la règle de «'+t+'» pas à pas.';
+    sum='أتقنتَ الدرس عندما تستعمل «'+t+'» في جُمل فرنسية صحيحة.';
+  } else if(s.indexOf('إنجليز')>-1||sl.indexOf('angl')>-1||sl.indexOf('engl')>-1){
+    core='«'+t+'» lesson learned through listening, reading then speaking and writing.';
+    steps=['نتعلّم المفردات الجديدة ونطقها الصحيح','نفهم القاعدة في أمثلة واضحة','نتدرّب شفهياً على جُمل بسيطة','نطبّق في تمارين كتابية','ننتج جُملاً خاصة بنا باللغة الإنجليزية'];
+    ex='Example: we build a correct sentence using «'+t+'» step by step.';
+    sum='You master it when you use «'+t+'» correctly on your own.';
+  } else if(s.indexOf('فلسف')>-1||sl.indexOf('philo')>-1){
+    core='«'+t+'» محور فلسفي نطرح فيه إشكالاً ونبني حجاجاً بمواقف متعدّدة.';
+    steps=['نفهم المفاهيم الأساسية وتعريفاتها في «'+t+'»','نطرح الإشكال الفلسفي الرئيسي للدرس','نعرض مواقف الفلاسفة مع الحجج المؤيّدة والمعارضة','نناقش ونقارن بين المواقف المختلفة','نبني خلاصة شخصية مُعلّلة ومنظّمة'];
+    ex='مثال: نحلّل قولة فلسفية حول «'+t+'» ونستخرج الأطروحة والحجاج.';
+    sum='أتقنتَ المحور عندما تبني مقالة فلسفية منظّمة حول «'+t+'».';
+  } else if(s.indexOf('فيزياء')>-1||s.indexOf('كيمياء')>-1||sl.indexOf('physique')>-1||sl.indexOf('chimie')>-1){
+    core='«'+t+'» درس في الفيزياء-الكيمياء نفهمه بالتجربة ثم القانون ثم التطبيق الرقمي.';
+    steps=['نلاحظ التجربة أو الظاهرة ونطرح التساؤل','نتعرّف على المفاهيم والقوانين (lois/formules)','نكتب العلاقات ووحدات القياس بدقّة','نطبّق على تمارين رقمية وحسابية','نستنتج ونربط النتيجة بالواقع'];
+    ex='مثال: نطبّق قانون «'+t+'» على تمرين رقمي مع الوحدات.';
+    sum='أتقنتَ الدرس عندما تحلّ تمريناً وتفسّر الظاهرة علمياً.';
+  } else if(s.indexOf('الحياة')>-1||sl.indexOf('svt')>-1){
+    core='«'+t+'» درس في علوم الحياة والأرض نفهمه بالملاحظة وتحليل الوثائق.';
+    steps=['نلاحظ الوثائق والصور والرسوم حول «'+t+'»','نستخرج المعطيات والمعلومات المهمّة','نفسّر الظاهرة البيولوجية أو الجيولوجية','نرسم خطاطة أو مبيان تلخيصي','نستنتج ونربط بالمحيط والصحة'];
+    ex='مثال: نحلّل وثيقة حول «'+t+'» ونستخرج الاستنتاج العلمي.';
+    sum='أتقنتَ الدرس عندما تفسّر الظاهرة وتحلّل وثيقة جديدة وحدك.';
+  } else if(s.indexOf('علمي')>-1||sl.indexOf('scien')>-1){
+    core='«'+t+'» نشاط علمي نكتشفه بالملاحظة والتجربة البسيطة.';
+    steps=['نلاحظ الظاهرة من حولنا ونطرح سؤالاً','نجرّب تجربة بسيطة وآمنة','نسجّل ما لاحظناه بالرسم أو الكتابة','نستنتج القاعدة العلمية','نربط ما تعلّمناه بحياتنا اليومية'];
+    ex='مثال: نجري تجربة صغيرة توضّح فكرة «'+t+'».';
+    sum='أتقنتَ الدرس عندما تشرح «'+t+'» بأمثلة من محيطك.';
+  } else if(s.indexOf('اجتماع')>-1||sl.indexOf('hist')>-1||sl.indexOf('géo')>-1){
+    core='«'+t+'» درس في الاجتماعيات نفهمه بقراءة الخرائط والوثائق التاريخية.';
+    steps=['نحدّد الموضوع والإطار الزماني والمكاني','نقرأ الخريطة أو الوثيقة ونستخرج المعطيات','نفسّر الأحداث أو الظواهر وأسبابها','نقارن ونستنتج النتائج','نربط بقيم المواطنة والواقع الحالي'];
+    ex='مثال: نحلّل خريطة أو وثيقة حول «'+t+'» ونستخرج الخلاصة.';
+    sum='أتقنتَ الدرس عندما تشرح «'+t+'» وتحلّل وثيقة جديدة.';
+  } else if(s.indexOf('إسلام')>-1){
+    core='«'+t+'» درس نتعلّم فيه القيم والأحكام ونربطها بسلوكنا اليومي.';
+    steps=['نقرأ النصوص الشرعية (آيات/أحاديث) المرتبطة بالدرس','نفهم المعاني والأحكام الأساسية','نستخرج القيم والمقاصد','نطبّقها في مواقف من حياتنا','نلتزم بها سلوكاً مع الأسرة والمجتمع'];
+    ex='مثال: نربط «'+t+'» بموقف واقعي ونستخرج القيمة المستفادة.';
+    sum='أتقنتَ الدرس عندما تطبّق «'+t+'» في سلوكك اليومي.';
+  } else if(s.indexOf('معلوم')>-1||sl.indexOf('informat')>-1){
+    core='«'+t+'» درس في المعلوميات نفهمه بالمنطق ثم التطبيق العملي على الحاسوب.';
+    steps=['نفهم المفهوم والمصطلحات الأساسية','نتعلّم الخوارزمية أو الخطوات المنطقية','نكتب الكود أو ننجز العملية خطوة بخطوة','نختبر ونصحّح الأخطاء','نطبّق على تمرين عملي جديد'];
+    ex='مثال: ننجز خوارزمية بسيطة توضّح فكرة «'+t+'».';
+    sum='أتقنتَ الدرس عندما تنجز تمريناً عملياً وحدك.';
+  } else if(s.indexOf('اقتصاد')>-1||s.indexOf('محاسب')>-1||s.indexOf('تدبير')>-1){
+    core='«'+t+'» درس اقتصادي/محاسباتي نفهمه بالمفاهيم ثم الحالات العملية والحساب.';
+    steps=['نفهم المفاهيم والمصطلحات الاقتصادية في «'+t+'»','نتعرّف على القاعدة أو العلاقة الحسابية','نطبّق على حالة عملية (cas pratique)','نحلّ تمارين وجداول ومبيانات','نستنتج ونحلّل النتائج'];
+    ex='مثال: نحلّل حالة عملية حول «'+t+'» ونستخرج النتيجة.';
+    sum='أتقنتَ الدرس عندما تحلّل حالة جديدة وتفسّر أرقامها.';
+  } else if(s.indexOf('تكنولوج')>-1||s.indexOf('هندسة')>-1||sl.indexOf('techno')>-1||sl.indexOf('génie')>-1||sl.indexOf('ing')>-1){
+    core='«'+t+'» درس تقني/هندسي نفهمه بالتحليل الوظيفي ثم التطبيق العملي.';
+    steps=['نحلّل الحاجة والوظيفة الأساسية للنظام','نتعرّف على المكوّنات ودور كل جزء','نقرأ المخطّط أو الرسم التقني','نطبّق على تمرين أو منجز عملي','نقيّم النتيجة ونحسّنها'];
+    ex='مثال: نحلّل نظاماً بسيطاً مرتبطاً بـ«'+t+'» ونبيّن وظيفته.';
+    sum='أتقنتَ الدرس عندما تحلّل نظاماً جديداً وتفهم عمله.';
+  } else if(s.indexOf('سيبر')>-1||s.indexOf('أمن')>-1){
+    core='«'+t+'» مفهوم في الأمن الرقمي نفهمه بمثال واقعي ثم نطبّق الحماية.';
+    steps=['نفهم ما هو «'+t+'» ولماذا هو مهمّ','نرى مثالاً واقعياً للخطر أو الحالة','نتعلّم خطوات الحماية والتصرّف الآمن','نطبّق النصائح على حساباتنا وأجهزتنا','نلتزم بالأخلاقيات والقانون دائماً'];
+    ex='مثال: نرى حالة واقعية حول «'+t+'» وكيف نحمي أنفسنا منها.';
+    sum='أتقنتَ الدرس عندما تحمي بياناتك وتتصرّف بأمان على الإنترنت.';
+  } else if(s.indexOf('فني')>-1||sl.indexOf('art')>-1){
+    core='«'+t+'» نشاط فني ننمّي به الإبداع والتعبير الجمالي.';
+    steps=['نلاحظ نماذج فنية ونستلهم منها','نتعرّف على التقنية والأدوات','نجرّب ونرسم بحرّية','نحسّن العمل باللمسات والألوان','نعرض عملنا ونفتخر به'];
+    ex='مثال: ننجز عملاً فنياً صغيراً يوظّف فكرة «'+t+'».';
+    sum='أتقنتَ النشاط عندما تعبّر عن فكرتك بعمل فني جميل.';
+  } else {
+    core='«'+t+'» نفهمه خطوة بخطوة عبر أمثلة وأنشطة بسيطة.';
+    steps=['نقرأ ونفهم فكرة «'+t+'» الأساسية','نلاحظ أمثلة توضيحية','نطبّق في تمارين بسيطة','نصحّح أخطاءنا','نراجع ونتأكّد من الفهم'];
+    ex='مثال: نطبّق فكرة «'+t+'» في نشاط بسيط.';
+    sum='أتقنتَ الدرس عندما تشرحه بنفسك بسهولة.';
+  }
+  var h='<div class="exp">';
+  h+='<div class="exp-goal">🎯 <b>الهدف:</b> '+(desc?desc+' — ':'')+core+'</div>';
+  h+='<div class="exp-steps">';
+  for(var i=0;i<steps.length;i++){ h+='<div class="exp-step">➡️ <span><b>'+(i+1)+'.</b> '+steps[i]+'</span></div>'; }
+  h+='</div>';
+  h+='<div class="exp-ex">✍️ <b>مثال تطبيقي:</b> '+ex+'</div>';
+  h+='<div class="exp-sum">✅ <b>خلاصة سريعة:</b> '+sum+'</div>';
+  h+='<div class="exp-fr">🎬 Explication détaillée, étape par étape → regardez la vidéo ci-dessous pour mieux comprendre «'+t+'».</div>';
+  h+='</div>';
+  return h;
+}
+function lessonCard(ar,en,desc,q,subj,kids,cls){
+  return '<a class="lesson'+(cls?' '+cls:'')+'" href="'+yt(q,kids)+'" target="_blank" rel="noopener">'+
+    '<div class="lt">▶️ <span>'+ar+'</span></div>'+
+    (en?'<div style="font-size:11px;color:#9fd9ff;font-family:Orbitron;margin-top:2px">'+en+'</div>':'')+
+    '<div class="ld">'+detailExp(subj,ar,desc)+'</div>'+
+    '<span class="play">▶ شاهد الشرح · YouTube</span></a>';
+}
+function renderLevel(where,lvl){
+  const data=CURR['L'+lvl]; let h='';
+  for(const key in data){
+    const [sar,sfr,emo]=key.split('|');
+    h+='<div class="subject"><h3>'+emo+' '+sar+' <span class="fr">'+sfr+'</span></h3><div class="lessons">';
+    data[key].forEach(l=>{ h+=lessonCard(l[0],'',l[1], sar+' '+l[0]+' المستوى '+lvl+' ابتدائي', sar, true); });
+    h+='</div></div>';
+  }
+  document.getElementById('content-'+where).innerHTML=h;
+}
+function buildTabs(where){
+  const t=document.getElementById('tabs-'+where); let h='';
+  LEVELS.forEach((lv,i)=>{ const [ar,fr]=lv.split('|'); h+='<div class="tab'+(i===0?' on':'')+'" data-l="'+(i+1)+'">'+ar+' · '+fr+'</div>'; });
+  t.innerHTML=h;
+  t.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{ t.querySelectorAll('.tab').forEach(x=>x.classList.remove('on')); tab.classList.add('on'); renderLevel(where,tab.dataset.l); });
+  renderLevel(where,1);
+}
+function renderCyber(){
+  let h='<div class="subject"><h3>🛡️ المسار التمهيدي <span class="fr">Parcours d\'initiation</span></h3><div class="lessons">';
+  CYBER.forEach(c=>{ const [ar,en]=c[0].split('|'); h+=lessonCard(ar,en,c[1], ar+' أمن سيبراني للمبتدئين', 'الأمن السيبراني'); });
+  h+='</div></div>';
+  document.getElementById('content-cyber').innerHTML=h;
+}
+/* buildTabs('privee') — استُبدل بـ buildGraded('privee',GRADES_ALL) أدناه */
+</script>
+<script>
+/* ===== المستويات الكاملة للمدرسة الرائدة (مسار دولي · خيار فرنسي) ===== */
+const GRADES=[
+ {cat:'🏫 الابتدائي · Primaire', items:[
+  {id:'L1',ar:'الأول ابتدائي',fr:'1ère Prim',g:'المستوى الأول ابتدائي',kids:true},
+  {id:'L2',ar:'الثاني ابتدائي',fr:'2ème Prim',g:'المستوى الثاني ابتدائي',kids:true},
+  {id:'L3',ar:'الثالث ابتدائي',fr:'3ème Prim',g:'المستوى الثالث ابتدائي',kids:true},
+  {id:'L4',ar:'الرابع ابتدائي',fr:'4ème Prim',g:'المستوى الرابع ابتدائي',kids:true},
+  {id:'L5',ar:'الخامس ابتدائي',fr:'5ème Prim',g:'المستوى الخامس ابتدائي',kids:true},
+  {id:'L6',ar:'السادس ابتدائي',fr:'6ème Prim',g:'المستوى السادس ابتدائي',kids:true}
+ ]},
+ {cat:'🏫 الإعدادي · Collège', items:[
+  {id:'C1',ar:'الأولى إعدادي',fr:'1ère AC',g:'الأولى إعدادي دولي خيار فرنسي',kids:false},
+  {id:'C2',ar:'الثانية إعدادي',fr:'2ème AC',g:'الثانية إعدادي دولي خيار فرنسي',kids:false},
+  {id:'C3',ar:'الثالثة إعدادي',fr:'3ème AC',g:'الثالثة إعدادي دولي خيار فرنسي',kids:false}
+ ]}
+];
+const GRADES_LY=[
+ {cat:'🎓 الجذع المشترك · Tronc Commun', items:[
+  {id:'TCS',ar:'جذع مشترك علمي (خيار فرنسي)',fr:'TC Sciences',g:'الجذع المشترك العلمي خيار فرنسي',kids:false},
+  {id:'TCT',ar:'جذع مشترك تكنولوجي TCT',fr:'TC Technologique',g:'الجذع المشترك التكنولوجي TCT خيار فرنسي',kids:false}
+ ]},
+ {cat:'🎓 الأولى باك · 1ère Bac', items:[
+  {id:'1BSE',ar:'علوم تجريبية',fr:'Sc. Exp',g:'الأولى باك علوم تجريبية دولي خيار فرنسي',kids:false},
+  {id:'1BSM',ar:'علوم رياضية',fr:'Sc. Maths',g:'الأولى باك علوم رياضية دولي خيار فرنسي',kids:false},
+  {id:'1BST',ar:'علوم وتكنولوجيا',fr:'STE/STM',g:'الأولى باك علوم وتكنولوجيا دولي خيار فرنسي',kids:false},
+  {id:'1BECO',ar:'علوم اقتصادية وتدبير',fr:'Sc. Éco',g:'الأولى باك علوم اقتصادية وتدبير دولي خيار فرنسي',kids:false},
+  {id:'1BLSH',ar:'آداب وعلوم إنسانية',fr:'Lettres & SH',g:'الأولى باك آداب وعلوم إنسانية',kids:false}
+ ]},
+ {cat:'🎓 الثانية باك · 2ème Bac', items:[
+  {id:'2BPC',ar:'علوم فيزيائية PC',fr:'Sc. Physiques',g:'الثانية باك علوم فيزيائية دولي خيار فرنسي',kids:false},
+  {id:'2BSVT',ar:'علوم الحياة والأرض SVT',fr:'SVT',g:'الثانية باك علوم الحياة والأرض دولي خيار فرنسي',kids:false},
+  {id:'2BSMA',ar:'علوم رياضية أ',fr:'Sc. Maths A',g:'الثانية باك علوم رياضية أ دولي خيار فرنسي',kids:false},
+  {id:'2BSMB',ar:'علوم رياضية ب',fr:'Sc. Maths B',g:'الثانية باك علوم رياضية ب دولي خيار فرنسي',kids:false},
+  {id:'2BSTE',ar:'علوم وتكنولوجيا كهربائية',fr:'STE',g:'الثانية باك علوم وتكنولوجيا كهربائية دولي',kids:false},
+  {id:'2BSTM',ar:'علوم وتكنولوجيا ميكانيكية',fr:'STM',g:'الثانية باك علوم وتكنولوجيا ميكانيكية دولي',kids:false},
+  {id:'2BECO',ar:'علوم اقتصادية',fr:'Sc. Éco',g:'الثانية باك علوم اقتصادية دولي خيار فرنسي',kids:false},
+  {id:'2BLSH',ar:'آداب وعلوم إنسانية',fr:'Lettres & SH',g:'الثانية باك آداب وعلوم إنسانية',kids:false}
+ ]}
+];
+const GRADES_ALL=GRADES.concat(GRADES_LY);
+const GRADES_FP=[
+ {cat:'🎓 تقني متخصص · Technicien Spécialisé (Bac+2)', items:[
+  {id:'FP_TS_DEV',ar:'التطوير الرقمي',fr:'Dév. Digital',g:'تقني متخصص في التطوير الرقمي',kids:false},
+  {id:'FP_TS_INFRA',ar:'البنيات الرقمية والشبكات',fr:'Infrastructure Digitale',g:'تقني متخصص في البنيات الرقمية والشبكات',kids:false},
+  {id:'FP_TS_GEST',ar:'تدبير المقاولات',fr:'Gestion des Entreprises',g:'تقني متخصص في تدبير المقاولات',kids:false},
+  {id:'FP_TS_COM',ar:'التجارة والتسويق',fr:'Commerce & Marketing',g:'تقني متخصص في التجارة والتسويق',kids:false},
+  {id:'FP_TS_COMPTA',ar:'المحاسبة والمالية',fr:'Comptabilité-Finance',g:'تقني متخصص في التدبير المحاسباتي',kids:false},
+  {id:'FP_TS_ELEC',ar:'الكهرباء والميكاترونيك',fr:'Électromécanique',g:'تقني متخصص في الكهرباء والميكاترونيك',kids:false},
+  {id:'FP_TS_MECA',ar:'الهندسة الميكانيكية',fr:'Génie Mécanique',g:'تقني متخصص في الهندسة الميكانيكية',kids:false},
+  {id:'FP_TS_HOTEL',ar:'الفندقة والسياحة',fr:'Tourisme-Hôtellerie',g:'تقني متخصص في الفندقة والسياحة',kids:false},
+  {id:'FP_TS_LOG',ar:'اللوجستيك والنقل',fr:'Logistique',g:'تقني متخصص في اللوجستيك',kids:false},
+  {id:'FP_TS_BTP',ar:'البناء والأشغال العمومية',fr:'BTP',g:'تقني متخصص في البناء والأشغال العمومية',kids:false},
+  {id:'FP_TS_SANTE',ar:'المهن شبه الطبية',fr:'Santé',g:'تقني متخصص في المهن شبه الطبية',kids:false},
+  {id:'FP_TS_AUDIO',ar:'السمعي البصري والمونتاج',fr:'Audiovisuel',g:'تقني متخصص في السمعي البصري',kids:false}
+ ]},
+ {cat:'🔧 تقني · Technicien', items:[
+  {id:'FP_T_DEV',ar:'الإعلاميات',fr:'Informatique',g:'تقني في تقنيات تطوير المعلوميات',kids:false},
+  {id:'FP_T_COMPTA',ar:'المحاسبة',fr:'Comptabilité',g:'تقني في المحاسبة',kids:false},
+  {id:'FP_T_COM',ar:'التجارة',fr:'Commerce',g:'تقني في التجارة',kids:false},
+  {id:'FP_T_ELEC',ar:'الكهرباء',fr:'Électricité',g:'تقني في التركيبات الكهربائية',kids:false},
+  {id:'FP_T_AUTO',ar:'ميكانيك السيارات',fr:'Mécanique Auto',g:'تقني في تشخيص وإصلاح السيارات',kids:false},
+  {id:'FP_T_CUIS',ar:'الطبخ والطهي',fr:'Cuisine',g:'تقني في فنون الطبخ',kids:false},
+  {id:'FP_T_COUT',ar:'الخياطة والتفصيل',fr:'Couture',g:'تقني في الخياطة والتفصيل',kids:false}
+ ]},
+ {cat:'🛠️ التأهيل · Qualification', items:[
+  {id:'FP_Q_COIF',ar:'الحلاقة والتجميل',fr:'Coiffure-Esthétique',g:'التأهيل في الحلاقة والتجميل',kids:false},
+  {id:'FP_Q_COUT',ar:'الخياطة',fr:'Couture',g:'التأهيل في الخياطة',kids:false},
+  {id:'FP_Q_ELEC',ar:'الكهرباء المنزلية',fr:'Électricité Bâtiment',g:'التأهيل في الكهرباء المنزلية',kids:false},
+  {id:'FP_Q_AUTO',ar:'ميكانيك السيارات',fr:'Mécanique Auto',g:'التأهيل في ميكانيك السيارات',kids:false},
+  {id:'FP_Q_MENUI',ar:'النجارة',fr:'Menuiserie',g:'التأهيل في النجارة',kids:false},
+  {id:'FP_Q_SOUD',ar:'اللحام',fr:'Soudure',g:'التأهيل في اللحام',kids:false}
+ ]},
+ {cat:'⚙️ التخصص · Spécialisation', items:[
+  {id:'FP_S_MACON',ar:'البناء',fr:'Maçonnerie',g:'التخصص في البناء',kids:false},
+  {id:'FP_S_COUT',ar:'الخياطة',fr:'Couture',g:'التخصص في الخياطة',kids:false},
+  {id:'FP_S_COIF',ar:'الحلاقة',fr:'Coiffure',g:'التخصص في الحلاقة',kids:false},
+  {id:'FP_S_AGRI',ar:'الفلاحة',fr:'Agriculture',g:'التخصص في الفلاحة',kids:false},
+  {id:'FP_S_PLOMB',ar:'السباكة',fr:'Plomberie',g:'التخصص في السباكة',kids:false}
+ ]}
+];
+function buildGraded(where,grades){
+  const cb=document.getElementById('cats-'+where); const st={cur:0}; let c='';
+  grades.forEach((g,i)=>{ c+='<button class="catbtn'+(i===0?' on':'')+'" data-c="'+i+'">'+g.cat+'</button>'; });
+  cb.innerHTML=c;
+  function render(g){
+    const data=CURR[g.id]||{}; let h='';
+    for(const key in data){ const p=key.split('|');
+      h+='<div class="subject"><h3>'+p[2]+' '+p[0]+' <span class="fr">'+p[1]+'</span></h3><div class="lessons">';
+      data[key].forEach(l=>{ h+=lessonCard(l[0],p[1],l[1], p[0]+' '+l[0]+' '+g.g, p[0], g.kids); });
+      h+='</div></div>';
+    }
+    if(!h) h='<p style="color:#9fd9ff;padding:14px">جارٍ إضافة المحتوى…</p>';
+    document.getElementById('content-'+where).innerHTML=h;
+  }
+  function tabs(){
+    const t=document.getElementById('tabs-'+where); const items=grades[st.cur].items; let h='';
+    items.forEach((it,i)=>{ h+='<div class="tab'+(i===0?' on':'')+'" data-i="'+i+'">'+it.ar+' · '+it.fr+'</div>'; });
+    t.innerHTML=h;
+    t.querySelectorAll('.tab').forEach(tab=>tab.onclick=()=>{ t.querySelectorAll('.tab').forEach(x=>x.classList.remove('on')); tab.classList.add('on'); render(items[+tab.dataset.i]); });
+    render(items[0]);
+  }
+  cb.querySelectorAll('.catbtn').forEach(b=>b.onclick=()=>{ st.cur=+b.dataset.c; cb.querySelectorAll('.catbtn').forEach(x=>x.classList.remove('on')); b.classList.add('on'); tabs(); });
+  tabs();
+}
+Object.assign(CURR,{
+C1:{
+'اللغة العربية|Arabe|📖':[['أقسام الكلام','الاسم والفعل والحرف وعلامات كل قسم.'],['الجملة الفعلية','الفعل والفاعل والمفعول به.'],['الدرس القرائي','نصوص وظيفية وأدبية مع الفهم.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Le conte','Lire et comprendre un conte merveilleux.'],['Les types de phrases','Déclarative, interrogative, exclamative, impérative.'],['Le présent de l\'indicatif','Conjugaison des verbes au présent.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Greetings & Introductions','Say hello and introduce yourself.'],['Present Simple','Daily routines and habits.']],
+'الرياضيات|Maths|🔢':[['Les entiers naturels','الأعداد الصحيحة الطبيعية والعمليات.'],['Les nombres décimaux','الأعداد العشرية والعمليات عليها.'],['Les fractions','مفهوم الكسر وتبسيطه.'],['La symétrie axiale','التماثل المحوري والإنشاءات الهندسية.']],
+'علوم الحياة والأرض|SVT|🧠':[['La nutrition','التغذية عند الإنسان والأغذية.'],['La respiration','التنفس عند الإنسان والحيوان.'],['L\'environnement','العلاقات الغذائية في الأوساط الطبيعية.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['الحضارات القديمة','مصر وبلاد الرافدين.'],['قراءة الخريطة','الخريطة ورموزها ومقياس الرسم.'],['التربية على المواطنة','الحقوق والواجبات.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القرآن الكريم','سور وآيات مع التجويد.'],['العقيدة والعبادات','أركان الإسلام والإيمان.']],
+'المعلوميات|Informatique|💻':[['مكونات الحاسوب','العتاد والبرمجيات.'],['نظام التشغيل','التعامل مع الملفات والمجلدات.']]
+},
+C2:{
+'اللغة العربية|Arabe|📖':[['الجملة الاسمية','المبتدأ والخبر.'],['المفاعيل','المفعول المطلق ولأجله وفيه.'],['النص الحجاجي','تحليل نص واستخراج أفكاره.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Le récit de vie','Raconter un événement vécu.'],['L\'imparfait & le passé composé','Les temps du récit au passé.'],['Le portrait','Décrire une personne physiquement et moralement.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Past Simple','Talking about past events.'],['Countable & Uncountable','Food and quantities.']],
+'الرياضيات|Maths|🔢':[['Les nombres relatifs','الأعداد النسبية والعمليات.'],['La proportionnalité','التناسبية والنسبة المئوية.'],['Le théorème de Thalès','مبرهنة طالس وتطبيقاتها.'],['Aires et volumes','المساحات والحجوم.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['L\'électricité','الدارة الكهربائية البسيطة.'],['La matière','حالات المادة وتحولاتها.']],
+'علوم الحياة والأرض|SVT|🧠':[['La classification','تصنيف الكائنات الحية.'],['Les séismes & volcans','الظواهر الجيولوجية.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['الحضارة الإسلامية','الدولة العربية الإسلامية.'],['المجال المغربي','التضاريس والمناخ.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القرآن الكريم','حفظ وتفسير آيات.'],['القيم الإسلامية','الصدق والأمانة.']]
+},
+C3:{
+'اللغة العربية|Arabe|📖':[['النواسخ','كان وأخواتها وإن وأخواتها.'],['البلاغة','التشبيه والاستعارة.'],['التعبير والإنشاء','كتابة موضوع مترابط.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Le texte argumentatif','Défendre une opinion avec des arguments.'],['Le futur simple','Conjugaison et emploi du futur.'],['La nouvelle réaliste','قراءة وتحليل نص سردي.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Future (will / going to)','Making predictions and plans.'],['Comparatives','Comparing people and things.']],
+'الرياضيات|Maths|🔢':[['Le calcul littéral','الحساب الحرفي والنشر والتعميل.'],['Équations du 1er degré','المعادلات من الدرجة الأولى.'],['Théorème de Pythagore','مبرهنة فيثاغورس.'],['Trigonométrie','النسب المثلثية.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['La lumière','الضوء والرؤية.'],['Les circuits','التوتر والتيار الكهربائي.'],['Les molécules','الذرات والجزيئات.']],
+'علوم الحياة والأرض|SVT|🧠':[['La reproduction humaine','التكاثر عند الإنسان.'],['La géologie','سلسلة الجبال وتشكلها.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['الحرب العالمية','الحربان العالميتان.'],['التنمية','التنمية البشرية والمستدامة.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['المعاملات','الأخلاق في المعاملات.'],['السيرة','محطات من السيرة النبوية.']]
+}
+});
+Object.assign(CURR,{
+TCS:{
+'الرياضيات|Maths|🔢':[['Ensembles de nombres','مجموعات الأعداد N Z Q R.'],['Calcul vectoriel','الحساب المتجهي في المستوى.'],['La projection','الإسقاط والمعادلة الديكارتية.'],['Généralités sur les fonctions','عموميات حول الدوال.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['La gravitation universelle','التجاذب الكوني.'],['Les mouvements','حركة الأجسام.'],['Modèle de l\'atome','نموذج الذرة والتصنيف الدوري.'],['La mole','المول والكمية المادية.']],
+'علوم الحياة والأرض|SVT|🧠':[['Écologie','البيئة والتوازنات الطبيعية.'],['Géologie','ظواهر جيولوجية خارجية.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Le Dernier Jour d\'un Condamné','مؤلف فيكتور هوغو.'],['Le registre tragique','دراسة النصوص.'],['L\'essai','كتابة نص حجاجي.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Present Perfect','Life experiences.'],['Giving opinions','Agreeing and disagreeing.']],
+'اللغة العربية|Arabe|📖':[['المنهج التاريخي','مناهج دراسة الأدب.'],['النص الشعري','تحليل قصيدة.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['العالم المتوسطي','التبادلات والحضارات.'],['النظام البيئي','المجال والموارد.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القيم','حقوق الإنسان في الإسلام.']],
+'المعلوميات|Informatique|💻':[['Algorithmique','مبادئ الخوارزميات.'],['Tableur','الجداول الممعلمة.']]
+},
+TCT:{
+'الرياضيات|Maths|🔢':[['Calcul numérique','الحساب العددي.'],['Géométrie','الهندسة المستوية.'],['Les fonctions','دراسة الدوال.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Électricité','التيار الكهربائي المستمر.'],['Mécanique','القوى والحركة.']],
+'التكنولوجيا|Technologie|⚙️':[['Lecture de dessin','قراءة الرسم التقني.'],['Les matériaux','خصائص المواد.'],['Fonction technique','الوظائف التقنية للمنتوج.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Compréhension','فهم النصوص.'],['Production écrite','التعبير الكتابي.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Technical English','Vocabulary for technology.']],
+'اللغة العربية|Arabe|📖':[['النصوص','دراسة نصوص وظيفية.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القيم','العمل والإتقان.']]
+}
+});
+Object.assign(CURR,{
+'1BSE':{
+'الرياضيات|Maths|🔢':[['Barycentre','المرجح في المستوى.'],['Produit scalaire','الجداء السلمي.'],['Suites numériques','المتتاليات العددية.'],['Limites de fonctions','نهايات الدوال.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Travail et puissance','الشغل والقدرة.'],['Énergie','الطاقة الحركية والوضع.'],['La chimie organique','مدخل للكيمياء العضوية.']],
+'علوم الحياة والأرض|SVT|🧠':[['Génique & information','التشريح والوظائف.'],['Énergie des êtres vivants','استهلاك المادة العضوية.']],
+'اللغة الفرنسية|Français|🇫🇷':[['La Boîte à Merveilles','مؤلف أحمد سفريوي.'],['Antigone','مسرحية جان أنوي.'],['Le Dernier Jour d\'un Condamné','دراسة المؤلف.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Conditionals','Type 0, 1, 2.'],['Reported speech','Reporting statements.']],
+'اللغة العربية|Arabe|📖':[['النصوص','تحليل نصوص أدبية.']],
+'الفلسفة|Philosophie|🧩':[['ما الفلسفة؟','نشأة الفلسفة ومفهومها.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['الثورات','الثورة الصناعية.']]
+},
+'1BSM':{
+'الرياضيات|Maths|🔢':[['Logique','المنطق الرياضي.'],['Suites','المتتاليات.'],['Trigonométrie','الدوال المثلثية.'],['Dérivation','الاشتقاق وتطبيقاته.'],['Produit scalaire','الجداء السلمي.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Mécanique','الميكانيك والطاقة.'],['Électricité','ثنائي القطب RC.'],['Chimie','القياسات في الكيمياء.']],
+'علوم الحياة والأرض|SVT|🧠':[['Géologie','الظواهر الجيولوجية.']],
+'اللغة الفرنسية|Français|🇫🇷':[['La Boîte à Merveilles','دراسة المؤلف.'],['Antigone','دراسة المسرحية.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Conditionals','If-clauses.']],
+'الفلسفة|Philosophie|🧩':[['نشأة الفلسفة','الفلسفة والعلم.']]
+},
+'1BST':{
+'الرياضيات|Maths|🔢':[['Calcul vectoriel','الحساب المتجهي.'],['Fonctions','دراسة الدوال.'],['Dérivation','الاشتقاق.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Électricité','التيار المتناوب.'],['Mécanique','الحركة والقوى.']],
+'علوم المهندس|Sciences de l\'Ingénieur|⚙️':[['Analyse fonctionnelle','التحليل الوظيفي للنظام.'],['Chaîne d\'énergie','سلسلة الطاقة والمعلومة.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Technical English','مصطلحات تقنية.']],
+'الفلسفة|Philosophie|🧩':[['مدخل','ما الفلسفة؟']]
+},
+'1BECO':{
+'الاقتصاد والتنظيم|Économie|💹':[['المشكلة الاقتصادية','الحاجات والموارد.'],['المؤسسة','تصنيف المؤسسات.'],['السوق','العرض والطلب.']],
+'المحاسبة|Comptabilité|📊':[['الميزانية','الميزانية العمومية.'],['الفاتورة','إعداد الفواتير.']],
+'الرياضيات|Maths|🔢':[['Fonctions','الدوال والنهايات.'],['Suites','المتتاليات.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Business English','مصطلحات اقتصادية.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['العولمة','المبادلات العالمية.']]
+},
+'1BLSH':{
+'اللغة العربية|Arabe|📖':[['النص الشعري','الشعر العربي الحديث.'],['النص النثري','تحليل النصوص.'],['التعبير','المهارات الكتابية.']],
+'اللغة الفرنسية|Français|🇫🇷':[['La Boîte à Merveilles','دراسة المؤلف.'],['Antigone','دراسة المسرحية.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Reading','Comprehension skills.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['الحرب العالمية الأولى','الأسباب والنتائج.'],['المجال العالمي','التنظيم المجالي.']],
+'الفلسفة|Philosophie|🧩':[['نشأة الفلسفة','التفكير الفلسفي.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القيم','الحرية والمسؤولية.']]
+}
+});
+Object.assign(CURR,{
+'2BPC':{
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Ondes','الموجات الميكانيكية.'],['Électricité RC/RL/RLC','ثنائيات القطب.'],['Transformations nucléaires','التحولات النووية.'],['Cinétique chimique','التطور الزمني لتفاعل كيميائي.'],['Acides et bases','الأحماض والقواعد.']],
+'الرياضيات|Maths|🔢':[['Continuité','اتصال دالة.'],['Dérivabilité','الاشتقاق ودراسة الدوال.'],['Fonction logarithme','دالة لوجاريتم.'],['Fonction exponentielle','الدالة الأسية.'],['Intégrales','الحساب التكاملي.']],
+'علوم الحياة والأرض|SVT|🧠':[['Géologie','تاريخ الأرض.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Il était une fois un vieux couple heureux','مؤلف محمد خير الدين.'],['Le Président','مسرحية.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Passive voice','The passive form.']],
+'الفلسفة|Philosophie|🧩':[['الشخص','مجزوءة الوضع البشري.'],['الغير','وجود الغير.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القيم','الوسطية والاعتدال.']]
+},
+'2BSVT':{
+'علوم الحياة والأرض|SVT|🧠':[['Consommation de matière','استهلاك المادة العضوية.'],['Génétique','علم الوراثة.'],['Immunologie','المناعة.'],['Géologie','الظواهر الجيولوجية والتكتونية.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Ondes','الموجات.'],['Électricité','RC و RL و RLC.'],['Chimie','التفاعلات الكيميائية.']],
+'الرياضيات|Maths|🔢':[['Fonctions','اللوغاريتم والأسي.'],['Probabilités','الاحتمالات.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Writing','Essay writing.']],
+'الفلسفة|Philosophie|🧩':[['النظرية والتجريب','مجزوءة المعرفة.']]
+},
+'2BSMA':{
+'الرياضيات|Maths|🔢':[['Limites et continuité','النهايات والاتصال.'],['Dérivation','الاشتقاق.'],['Logarithme & exponentielle','الدوال اللوغاريتمية والأسية.'],['Nombres complexes','الأعداد العقدية.'],['Structures algébriques','البنيات الجبرية.'],['Intégrales','التكامل.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Mécanique de Newton','قوانين نيوتن.'],['Électricité','الدارات الكهربائية.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.']],
+'الفلسفة|Philosophie|🧩':[['المعرفة','مجزوءة المعرفة.']]
+},
+'2BSMB':{
+'الرياضيات|Maths|🔢':[['Arithmétique','الحسابيات.'],['Nombres complexes','الأعداد العقدية.'],['Intégrales','التكامل.'],['Équations différentielles','المعادلات التفاضلية.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Ondes','الموجات.'],['Mécanique','الميكانيك.']],
+'المعلوميات|Informatique|💻':[['Programmation','مبادئ البرمجة (Python).'],['Algorithmique','الخوارزميات المتقدمة.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.']],
+'الفلسفة|Philosophie|🧩':[['السياسة','مجزوءة السياسة.']]
+}
+});
+Object.assign(CURR,{
+'2BSTE':{
+'الهندسة الكهربائية|Génie Électrique|⚡':[['Systèmes logiques','الأنظمة المنطقية.'],['Moteurs électriques','المحركات الكهربائية.'],['Automatismes','الأنظمة المؤتمتة.']],
+'الرياضيات|Maths|🔢':[['Fonctions','دراسة الدوال.'],['Intégrales','التكامل.'],['Équations différentielles','المعادلات التفاضلية.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Électricité','التيار المتناوب.'],['Mécanique','الميكانيك.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.']],
+'الفلسفة|Philosophie|🧩':[['مدخل','الوضع البشري.']]
+},
+'2BSTM':{
+'الهندسة الميكانيكية|Génie Mécanique|⚙️':[['Dessin technique','الرسم الصناعي.'],['Résistance des matériaux','مقاومة المواد.'],['Cinématique','الحركيات.']],
+'الرياضيات|Maths|🔢':[['Fonctions','دراسة الدوال.'],['Intégrales','التكامل.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Mécanique','القوى والحركة.'],['Énergétique','الطاقة.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.']],
+'الفلسفة|Philosophie|🧩':[['مدخل','الوضع البشري.']]
+},
+'2BECO':{
+'الاقتصاد العام|Économie Générale|💹':[['النمو الاقتصادي','مؤشرات النمو.'],['التضخم والبطالة','المشاكل الاقتصادية.'],['المبادلات الخارجية','التجارة الدولية.']],
+'المحاسبة والرياضيات المالية|Comptabilité|📊':[['القوائم المالية','الميزانية وحساب النتيجة.'],['الفائدة','الفائدة البسيطة والمركبة.']],
+'الرياضيات|Maths|🔢':[['Fonctions','الدوال والنهايات.'],['Probabilités','الاحتمالات والإحصاء.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.']],
+'الفلسفة|Philosophie|🧩':[['الأخلاق','مجزوءة الأخلاق.']]
+},
+'2BLSH':{
+'اللغة العربية|Arabe|📖':[['إحياء النموذج','الشعر العربي الحديث.'],['تكسير البنية','التجريب الشعري.'],['القصة والمسرحية','الفنون النثرية.']],
+'الفلسفة|Philosophie|🧩':[['الوضع البشري','الشخص والغير.'],['المعرفة','النظرية والتجريب.'],['السياسة','الدولة والعنف.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['الحرب العالمية الثانية','الأسباب والنتائج.'],['المغرب المستقل','بناء الدولة الحديثة.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Writing & Reading','Comprehension and essays.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القيم','العدل والتسامح.']]
+}
+});
+const ROADMAP=[
+['الأساسيات والحاسوب','تعلّم مكوّنات الحاسوب وأنظمة التشغيل (Windows / Linux) وكيف تعمل.'],
+['الشبكات Networking','افهم بروتوكولات TCP/IP وDNS وHTTP والمنافذ وكيف تنتقل البيانات.'],
+['نظام لينكس Linux','أتقن أوامر الطرفية وإدارة الملفات والصلاحيات على Kali Linux.'],
+['البرمجة والسكربتات','تعلّم Python وBash لأتمتة المهام وفهم الثغرات.'],
+['أمن المعلومات','مبادئ السرية والسلامة والتوافر (CIA) والتشفير وحماية الحسابات.'],
+['اختبار الاختراق','ابدأ التطبيق العملي على مختبرات قانونية مثل TryHackMe وHackTheBox.']
+];
+const PHASES=[
+['الاستطلاع|Reconnaissance','جمع المعلومات عن الهدف (OSINT، النطاقات، المنافذ) قبل أي اختبار.'],
+['الفحص|Scanning','استكشاف الخدمات والمنافذ والثغرات باستعمال أدوات الفحص.'],
+['الاستغلال|Exploitation','استغلال الثغرة للوصول — في بيئة مصرّح بها قانونياً فقط.'],
+['ما بعد الاستغلال|Post-Exploitation','تقييم حجم الخطر وجمع الأدلة.'],
+['التقرير|Reporting','توثيق الثغرات واقتراح الحلول — أهم مرحلة في العمل الاحترافي.']
+];
+const TOOLS=[
+['Kali Linux','توزيعة لينكس مخصّصة لاختبار الاختراق تحتوي مئات الأدوات الجاهزة.'],
+['Nmap','أداة فحص الشبكات واكتشاف المنافذ والخدمات وأنظمة التشغيل.'],
+['Wireshark','محلّل حزم الشبكة لمراقبة وتحليل حركة المرور (Packets).'],
+['Metasploit','إطار عمل لاختبار الثغرات وتنفيذ الاختبارات المصرّح بها.'],
+['Burp Suite','أداة اختبار أمان تطبيقات الويب واعتراض الطلبات.'],
+['John the Ripper','أداة لاختبار قوة كلمات المرور (Password cracking).'],
+['Hydra','اختبار قوة بيانات الدخول على بروتوكولات متعددة.'],
+['SQLmap','كشف واستغلال ثغرات حقن SQL في قواعد البيانات.'],
+['Nikto','فحص خوادم الويب عن الثغرات والإعدادات الخاطئة.'],
+['Aircrack-ng','تقييم أمان الشبكات اللاسلكية Wi-Fi.']
+];
+function renderCyberFull(){
+  let h='';
+  h+='<div class="subject cyber-sub"><h3>🚀 كيف تبدأ طريقك في الأمن السيبيراني من الصفر <span class="fr">De zéro à pro</span></h3><div class="roadmap">';
+  ROADMAP.forEach((s,i)=>{ h+='<div class="step"><div class="sn">'+(i+1)+'</div><div class="st">'+s[0]+'</div><div class="sd">'+s[1]+'</div></div>'; });
+  h+='</div></div>';
+  h+='<div class="notice" style="border-color:rgba(255,45,85,.5);background:linear-gradient(135deg,rgba(255,45,85,.12),rgba(10,15,40,.5))"><div class="nt" style="color:#ff8aa0">⚠️ تنبيه أخلاقي وقانوني</div><div class="nd">اختبار الاختراق يُمارَس فقط على أنظمة تملكها أو لديك إذن مكتوب باختبارها. التعلّم يكون عبر مختبرات قانونية (TryHackMe · HackTheBox). الاختراق غير المصرّح به جريمة يعاقب عليها القانون.</div></div>';
+  h+='<div class="subject cyber-sub"><h3>🛡️ المسار التمهيدي للمبتدئين <span class="fr">Initiation</span></h3><div class="lessons">';
+  CYBER.forEach(c=>{ const p=c[0].split('|'); h+=lessonCard(p[0],p[1],c[1], p[0]+' أمن سيبيراني للمبتدئين', 'الأمن السيبيراني', false); });
+  h+='</div></div>';
+  h+='<div class="subject cyber-sub"><h3>🎯 مراحل اختبار الاختراق <span class="fr">Pentesting</span></h3><div class="lessons">';
+  PHASES.forEach(c=>{ const p=c[0].split('|'); h+=lessonCard(p[0],p[1],c[1], p[0]+' اختبار الاختراق شرح', 'الأمن السيبيراني', false); });
+  h+='</div></div>';
+  h+='<div class="subject cyber-sub"><h3>🧰 أدوات اختبار الاختراق <span class="fr">Pentest Tools</span></h3><div class="lessons">';
+  TOOLS.forEach(t=>{ h+=lessonCard(t[0],'',t[1], t[0]+' شرح اختبار الاختراق', 'الأمن السيبيراني', false, 'tool'); });
+  h+='</div></div>';
+  document.getElementById('content-cyber').innerHTML=h;
+}
+/* ===== إثراء شامل للدروس ===== */
+Object.assign(CURR,{
+TCS:{
+'الرياضيات|Maths|🔢':[['La logique (المنطق)','العبارات والروابط المنطقية والمكممات.'],['Ensembles et applications','المجموعات والتطبيقات.'],['Calcul vectoriel','الحساب المتجهي في المستوى.'],['La projection','الإسقاط في المستوى.'],['Géométrie analytique','الهندسة التحليلية ومعادلة المستقيم.'],['Le barycentre','المرجح وخاصياته.'],['Trigonométrie','الحساب المثلثي.'],['Généralités sur les fonctions','عموميات حول الدوال.'],['Transformations du plan','تحويلات المستوى.'],['Statistiques','الإحصاء.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Gravitation universelle','التجاذب الكوني.'],['Actions mécaniques','التأثيرات الميكانيكية.'],['Le mouvement','حركة جسم صلب.'],['Équilibre (2 forces)','توازن جسم تحت تأثير قوتين.'],['Équilibre (3 forces)','توازن جسم تحت ثلاث قوى.'],['Espèces chimiques','الأنواع الكيميائية والاستخلاص.'],['Modèle de l\'atome','نموذج الذرة.'],['Classification périodique','التصنيف الدوري.'],['La mole','المول والكمية المادية.'],['Concentration','التركيز والمحاليل.']],
+'علوم الحياة والأرض|SVT|🧠':[['Écologie','الوسط الطبيعي والتوازنات.'],['Les êtres vivants','الكائنات الحية وتوزعها.'],['La classification','تصنيف الكائنات.'],['Carte géologique','الخريطة الجيولوجية.'],['Les séismes','الزلازل والتكتونية.']],
+'اللغة العربية|Arabe|📖':[['المنهجية','منهجية تحليل النص.'],['النص الشعري','تحليل قصيدة.'],['النص النثري','تحليل نص نثري.'],['الدرس اللغوي','المشتقات والأساليب.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Le texte argumentatif','النص الحجاجي.'],['La nouvelle réaliste','دراسة النصوص.'],['Techniques d\'expression','مهارات التعبير.'],['La correspondance','الرسائل والطلبات.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Present perfect','Life experiences.'],['Modals','Ability, obligation, advice.'],['Conditionals','Types 0-1-2.'],['Reading & Writing','Comprehension and paragraphs.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['العالم المتوسطي','التبادل الحضاري.'],['تنظيم المجال','المجال والسكان.'],['الأنشطة الاقتصادية','الفلاحة والصناعة.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['حقوق الإنسان','القيم الحقوقية.'],['الوسطية','الاعتدال في الإسلام.']],
+'المعلوميات|Informatique|💻':[['Système informatique','النظام المعلوماتي.'],['Algorithmique','مبادئ الخوارزميات.'],['Tableur','الجداول الممعلمة.'],['Internet & sécurité','الأنترنت والأمن الرقمي.']]
+},
+TCT:{
+'الرياضيات|Maths|🔢':[['La logique (المنطق)','أساسيات المنطق.'],['Calcul numérique','الحساب العددي.'],['Calcul vectoriel','الحساب المتجهي.'],['Géométrie analytique','الهندسة التحليلية.'],['Les fonctions','دراسة الدوال.'],['Statistiques','الإحصاء.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Électricité','التيار الكهربائي المستمر.'],['Mécanique','القوى والحركة.'],['Équilibre','توازن الأجسام.'],['Chimie','الذرة والمول.']],
+'التكنولوجيا|Technologie|⚙️':[['Analyse fonctionnelle','التحليل الوظيفي.'],['Lecture de dessin','قراءة الرسم التقني.'],['Les matériaux','خصائص المواد.'],['Liaisons mécaniques','الوصلات الميكانيكية.'],['Les énergies','مصادر الطاقة.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Compréhension','فهم النصوص.'],['Production écrite','التعبير الكتابي.'],['Texte argumentatif','النص الحجاجي.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Technical English','مصطلحات تقنية.'],['Grammar','Tenses and modals.']],
+'اللغة العربية|Arabe|📖':[['النصوص','نصوص وظيفية.'],['الدرس اللغوي','الأساليب.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['العمل والإتقان','قيمة العمل.']],
+'المعلوميات|Informatique|💻':[['Algorithmique','الخوارزميات.'],['Tableur','الجداول.']]
+}
+});
+Object.assign(CURR,{
+'1BSE':{
+'الرياضيات|Maths|🔢':[['La logique (الوجيك · المنطق)','العبارات والروابط المنطقية والمكممات وأنواع الاستدلال.'],['Le barycentre','المرجح.'],['Produit scalaire','الجداء السلمي.'],['Trigonométrie','الحساب المثلثي والمعادلات.'],['Les suites numériques','المتتاليات العددية.'],['Limites d\'une fonction','نهايات دالة.'],['Dérivation','الاشتقاق ودراسة الدوال.'],['Le dénombrement','التعداد والتوافيق.'],['Géométrie dans l\'espace','الهندسة الفضائية.'],['La rotation','الدوران في المستوى.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Travail et puissance','الشغل والقدرة.'],['Énergie cinétique','الطاقة الحركية.'],['Énergie potentielle','طاقة الوضع والميكانيكية.'],['Champ électrostatique','المجال الكهربائي.'],['Champ magnétique','المجال المغناطيسي.'],['Mesures en chimie','القياسات الكيميائية.'],['Réactions acide-base','تفاعلات حمض-قاعدة.'],['Dosages','المعايرة.'],['Chimie organique','مدخل للكيمياء العضوية.']],
+'علوم الحياة والأرض|SVT|🧠':[['La digestion','الهضم والامتصاص.'],['La circulation','الدوران الدموي.'],['Le système nerveux','الجهاز العصبي.'],['Les chaînes de montagnes','السلاسل الجبلية.'],['Le phénomène sédimentaire','الترسّب.']],
+'اللغة الفرنسية|Français|🇫🇷':[['La Boîte à Merveilles','أحمد سفريوي.'],['Antigone','جان أنوي.'],['Le Dernier Jour d\'un Condamné','فيكتور هوغو.'],['Production écrite','التعبير الكتابي.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Conditionals','If-clauses.'],['Reported speech','الكلام المنقول.'],['Passive voice','المبني للمجهول.']],
+'اللغة العربية|Arabe|📖':[['المنهجية','منهجية النص.'],['النصوص','تحليل النصوص.'],['الدرس اللغوي','الأساليب.']],
+'الفلسفة|Philosophie|🧩':[['نشأة الفلسفة','من الأسطورة إلى العقل.'],['طبيعة الفكر الفلسفي','المفهومة والمنهج.'],['المنطق','مبادئ المنطق.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['الثورة الصناعية','التحولات الكبرى.'],['الحرب العالمية الأولى','الأسباب والنتائج.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القيم','الحرية والمسؤولية.']]
+},
+'1BSM':{
+'الرياضيات|Maths|🔢':[['La logique (الوجيك · المنطق)','المنطق الرياضي: العبارات والروابط والمكممات والاستدلال.'],['Les ensembles','المجموعات.'],['Les suites','المتتاليات.'],['Trigonométrie','الدوال المثلثية.'],['Limites et continuité','النهايات والاتصال.'],['Dérivation','الاشتقاق.'],['Étude de fonctions','دراسة الدوال.'],['Le dénombrement','التعداد.'],['Produit scalaire','الجداء السلمي.'],['Géométrie dans l\'espace','الهندسة الفضائية.'],['Le barycentre','المرجح.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Mécanique','الميكانيك والطاقة.'],['Le dipôle RC','ثنائي القطب RC.'],['Champs','المجالات الكهربائية والمغناطيسية.'],['Chimie','القياسات والتفاعلات.']],
+'علوم الحياة والأرض|SVT|🧠':[['Géologie','الظواهر الجيولوجية.'],['SVT générale','وظائف التغذية.']],
+'اللغة الفرنسية|Français|🇫🇷':[['La Boîte à Merveilles','دراسة المؤلف.'],['Antigone','دراسة المسرحية.'],['Le Dernier Jour','فيكتور هوغو.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Conditionals','If-clauses.'],['Passive','المبني للمجهول.']],
+'الفلسفة|Philosophie|🧩':[['نشأة الفلسفة','الفلسفة والعلم.'],['المنطق','الاستدلال.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القيم','العدل والإحسان.']]
+},
+'1BST':{
+'الرياضيات|Maths|🔢':[['La logique (الوجيك · المنطق)','أساسيات المنطق الرياضي والاستدلال.'],['Calcul vectoriel','الحساب المتجهي.'],['Les suites','المتتاليات.'],['Limites','نهايات الدوال.'],['Dérivation','الاشتقاق.'],['Étude de fonctions','دراسة الدوال.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Électricité','التيار المتناوب.'],['Mécanique','الحركة والقوى.'],['Chimie','التفاعلات.']],
+'علوم المهندس|Sciences de l\'Ingénieur|⚙️':[['Analyse fonctionnelle','التحليل الوظيفي.'],['Chaîne d\'énergie','سلسلة الطاقة.'],['Chaîne d\'information','سلسلة المعلومة.'],['Systèmes automatisés','الأنظمة المؤتمتة.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.'],['Production','التعبير.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Technical English','مصطلحات تقنية.']],
+'الفلسفة|Philosophie|🧩':[['نشأة الفلسفة','ما الفلسفة؟'],['المنطق','الاستدلال.']]
+}
+});
+Object.assign(CURR,{
+'1BECO':{
+'الاقتصاد والتنظيم|Économie|💼':[['المؤسسة ومحيطها','مفهوم المقاولة.'],['النشاط الاقتصادي','الإنتاج والاستهلاك.'],['السوق','العرض والطلب.'],['التنظيم الإداري','هياكل المقاولة.']],
+'المحاسبة|Comptabilité|🧮':[['الميزانية','الميزانية العمومية.'],['القيد المحاسبي','التسجيل المحاسبي.'],['الفواتير','معالجة الفواتير.']],
+'الرياضيات|Maths|🔢':[['Les suites','المتتاليات.'],['Les fonctions','دراسة الدوال.'],['Mathématiques financières','الرياضيات المالية.'],['Statistiques','الإحصاء.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['العولمة','الاقتصاد العالمي.'],['التنمية','إشكاليات التنمية.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.'],['Production','التعبير.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Business English','إنجليزية الأعمال.']],
+'الفلسفة|Philosophie|🧩':[['نشأة الفلسفة','مدخل.'],['المنطق','الاستدلال.']]
+},
+'1BLSH':{
+'اللغة العربية|Arabe|📖':[['النص الشعري','تحليل القصائد.'],['النص النثري','تحليل النصوص.'],['المنهجية','منهجية الكتابة.'],['الدرس اللغوي','البلاغة والأساليب.']],
+'الفلسفة|Philosophie|🧩':[['نشأة الفلسفة','من الأسطورة إلى العقل.'],['طبيعة الفكر الفلسفي','المفهومة.'],['المنطق','مبادئ المنطق.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['الثورة الصناعية','التحولات.'],['الحرب العالمية الأولى','الأسباب والنتائج.']],
+'اللغة الفرنسية|Français|🇫🇷':[['La Boîte à Merveilles','المؤلف.'],['Antigone','المسرحية.'],['Le Dernier Jour','الرواية.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Conditionals','If-clauses.'],['Reported speech','الكلام المنقول.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القيم','الحرية والمسؤولية.']]
+}
+});
+Object.assign(CURR,{
+'2BPC':{
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Ondes mécaniques','الموجات الميكانيكية.'],['Ondes lumineuses','الضوء والحيود.'],['Décroissance radioactive','التناقص الإشعاعي.'],['Noyau, masse et énergie','النواة والطاقة.'],['Dipôle RC','ثنائي القطب RC.'],['Dipôle RL','ثنائي القطب RL.'],['Circuit RLC','تذبذبات RLC.'],['Modulation','المضمين السعوي.'],['Transformations lentes/rapides','تتبع التفاعل.'],['Vitesse de réaction','سرعة التفاعل.'],['Acide-base & dosage','تفاعلات حمض-قاعدة والمعايرة.'],['Piles & électrolyse','الأعمدة والتحليل الكهربائي.'],['Chimie organique','الأسترة والحمأة.']],
+'الرياضيات|Maths|🔢':[['Continuité','الاتصال.'],['Dérivabilité','الاشتقاق.'],['Fonction logarithme','الدالة اللوغاريتمية.'],['Fonction exponentielle','الدالة الأسية.'],['Les suites','المتتاليات.'],['Calcul intégral','الحساب التكاملي.'],['Équations différentielles','المعادلات التفاضلية.'],['Nombres complexes','الأعداد العقدية.'],['Probabilités','الاحتمالات.'],['Géométrie dans l\'espace','الهندسة الفضائية.']],
+'علوم الحياة والأرض|SVT|🧠':[['Géologie','التكتونية العامة.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Il était une fois...','العربي المردوشي.'],['La Ligne Blanche','النص.'],['Production écrite','التعبير الكتابي.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Reading','فهم النصوص.'],['Writing','التعبير.']],
+'الفلسفة|Philosophie|🧩':[['الوضع البشري','الشخص والغير.'],['المعرفة','النظرية والتجريب.'],['السياسة','الدولة والعنف.'],['الأخلاق','الواجب والحرية.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القيم','الحق والواجب.']]
+},
+'2BSVT':{
+'علوم الحياة والأرض|SVT|🧠':[['Consommation de matière','استهلاك المادة العضوية.'],['Libération d\'énergie','التنفس والتخمر.'],['Rôle du muscle','دور العضلة.'],['Génétique','الوراثة البشرية.'],['Génie génétique','الهندسة الوراثية.'],['Immunologie','المناعة.'],['Communication nerveuse','التواصل العصبي.'],['Communication hormonale','التواصل الهرموني.'],['Tectonique des plaques','تكتونية الصفائح.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Ondes','الموجات.'],['Nucléaire','النوويات والطاقة.'],['Électricité','RC-RL-RLC.'],['Chimie','التفاعلات والمعايرة.']],
+'الرياضيات|Maths|🔢':[['Continuité & dérivation','الاتصال والاشتقاق.'],['Logarithme & exponentielle','الدوال اللوغاريتمية والأسية.'],['Suites','المتتاليات.'],['Calcul intégral','التكامل.'],['Probabilités','الاحتمالات.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Il était une fois...','المؤلف.'],['Production','التعبير.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Reading & Writing','فهم وتعبير.']],
+'الفلسفة|Philosophie|🧩':[['الوضع البشري','الشخص.'],['المعرفة','العلم.'],['الأخلاق','الواجب.']],
+'التربية الإسلامية|Éduc. Islamique|🕌':[['القيم','الحق والواجب.']]
+}
+});
+Object.assign(CURR,{
+'2BSMA':{
+'الرياضيات|Maths|🔢':[['Limites et continuité','النهايات والاتصال.'],['Dérivation & étude','الاشتقاق ودراسة الدوال.'],['Fonction logarithme','الدالة اللوغاريتمية.'],['Fonction exponentielle','الدالة الأسية.'],['Les suites','المتتاليات.'],['Calcul intégral','الحساب التكاملي.'],['Équations différentielles','المعادلات التفاضلية.'],['Nombres complexes','الأعداد العقدية.'],['Structures algébriques','البنيات الجبرية.'],['Espaces vectoriels','الفضاءات المتجهية.'],['Probabilités','الاحتمالات.'],['Géométrie dans l\'espace','الهندسة الفضائية والجداء المتجهي.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Ondes','الموجات الميكانيكية والضوئية.'],['Électricité','RC-RL-RLC والمضمين.'],['Nucléaire','النواة والطاقة.'],['Mécanique','قوانين نيوتن.'],['Chimie','التفاعلات والمعايرة.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.'],['Production','التعبير.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Reading & Writing','فهم وتعبير.']],
+'الفلسفة|Philosophie|🧩':[['الوضع البشري','الشخص والغير.'],['المعرفة','النظرية والتجريب.'],['الأخلاق','الواجب والحرية.']]
+},
+'2BSMB':{
+'الرياضيات|Maths|🔢':[['Limites et continuité','النهايات والاتصال.'],['Dérivation & étude','دراسة الدوال.'],['Logarithme & exponentielle','الدوال اللوغاريتمية والأسية.'],['Les suites','المتتاليات.'],['Calcul intégral','التكامل.'],['Équations différentielles','المعادلات التفاضلية.'],['Nombres complexes','الأعداد العقدية.'],['L\'arithmétique','الحسابيات.'],['Structures algébriques','البنيات الجبرية.'],['Probabilités','الاحتمالات.'],['Géométrie dans l\'espace','الهندسة الفضائية.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Ondes','الموجات.'],['Électricité','RC-RL-RLC.'],['Nucléaire','الطاقة النووية.'],['Chimie','التفاعلات.']],
+'المعلوميات|Informatique|💻':[['Algorithmique','الخوارزميات.'],['Programmation Python','البرمجة بلغة بايثون.'],['Structures de données','الجداول والمصفوفات.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','دراسة المؤلفات.'],['Production','التعبير.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Reading & Writing','فهم وتعبير.']],
+'الفلسفة|Philosophie|🧩':[['الوضع البشري','الشخص.'],['المعرفة','العلم والحقيقة.'],['الأخلاق','الواجب.']]
+}
+});
+Object.assign(CURR,{
+'2BSTE':{
+'الهندسة الكهربائية|Génie Électrique|⚡':[['Logique combinatoire','المنطق التوليفي.'],['Logique séquentielle','المنطق التتابعي.'],['Les automatismes','الأنظمة المؤتمتة.'],['Moteurs électriques','المحركات الكهربائية.'],['Électronique de puissance','إلكترونيات الاستطاعة.']],
+'الرياضيات|Maths|🔢':[['Continuité & dérivation','الاتصال والاشتقاق.'],['Logarithme & exponentielle','الدوال اللوغاريتمية والأسية.'],['Calcul intégral','التكامل.'],['Équations différentielles','المعادلات التفاضلية.'],['Nombres complexes','الأعداد العقدية.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Électricité','الدوائر الكهربائية.'],['Mécanique','الميكانيك.'],['Chimie','التفاعلات.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','المؤلفات.'],['Production','التعبير.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Technical English','مصطلحات تقنية.']],
+'الفلسفة|Philosophie|🧩':[['الوضع البشري','الشخص.'],['المعرفة','العلم.'],['الأخلاق','الواجب.']]
+},
+'2BSTM':{
+'الهندسة الميكانيكية|Génie Mécanique|⚙️':[['Analyse fonctionnelle','التحليل الوظيفي.'],['Dessin technique','الرسم التقني.'],['Cinématique','السينماتيك.'],['Résistance des matériaux','مقاومة المواد.'],['Les procédés','طرق التصنيع.']],
+'الرياضيات|Maths|🔢':[['Continuité & dérivation','الاتصال والاشتقاق.'],['Logarithme & exponentielle','الدوال.'],['Calcul intégral','التكامل.'],['Équations différentielles','المعادلات التفاضلية.'],['Nombres complexes','الأعداد العقدية.']],
+'الفيزياء والكيمياء|Physique-Chimie|⚗️':[['Mécanique','الميكانيك.'],['Électricité','الكهرباء.'],['Chimie','التفاعلات.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','المؤلفات.'],['Production','التعبير.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Technical English','مصطلحات تقنية.']],
+'الفلسفة|Philosophie|🧩':[['الوضع البشري','الشخص.'],['المعرفة','العلم.'],['الأخلاق','الواجب.']]
+},
+'2BECO':{
+'الاقتصاد والإحصاء|Économie|💼':[['التوازنات الاقتصادية','الناتج والدخل.'],['النقود والتمويل','السياسة النقدية.'],['المبادلات الخارجية','التجارة الدولية.'],['الإحصاء','التحاليل الإحصائية.']],
+'المحاسبة|Comptabilité|🧮':[['التسويات','أشغال النهاية.'],['القوائم المالية','الحصيلة والنتائج.']],
+'الرياضيات|Maths|🔢':[['Les fonctions','دراسة الدوال.'],['Les suites','المتتاليات.'],['Mathématiques financières','الرياضيات المالية.'],['Probabilités','الاحتمالات.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','المؤلفات.'],['Production','التعبير.']],
+'الفلسفة|Philosophie|🧩':[['الوضع البشري','الشخص.'],['المعرفة','العلم.'],['الأخلاق','الواجب.']]
+},
+'2BLSH':{
+'اللغة العربية|Arabe|📖':[['إحياء النموذج','شعر النهضة.'],['سؤال الذات','الشعر الرومانسي.'],['تكسير البنية','الشعر الحر.'],['تجديد الرؤيا','الشعر المعاصر.'],['المسرح والقصة','النثر الحديث.']],
+'الفلسفة|Philosophie|🧩':[['الوضع البشري','الشخص والغير والتاريخ.'],['المعرفة','النظرية والتجريب والحقيقة.'],['السياسة','الدولة والعنف والحق.'],['الأخلاق','الواجب والسعادة.']],
+'الاجتماعيات|Histoire-Géo|🗺️':[['الحرب العالمية الثانية','الأسباب والنتائج.'],['المغرب المعاصر','الاستقلال والبناء.']],
+'اللغة الفرنسية|Français|🇫🇷':[['Les œuvres','المؤلفات.'],['Production','التعبير.']],
+'اللغة الإنجليزية|Anglais|🇬🇧':[['Reading & Writing','فهم وتعبير.']]
+}
+});
+/*OVR*/
+/* ===== إكمال المواد الناقصة (تربية إسلامية / عربية / إنجليزية) ===== */
+(function(){
+var ISL=[['مدخل التزكية','الإيمان والغيب وتزكية النفس.'],['مدخل الاقتداء','من هدي الرسول ⷮ في القيم والسلوك.'],['مدخل الاستجابة','أحكام شرعية وقيم عملية.'],['مدخل الحكمة','التفكر والاعتبار والعقل.'],['مدخل القسط','الحقوق والواجبات والعدل.']];
+var ARB=[['المؤلفات','دراسة المؤلف المقرر.'],['النصوص','تحليل النصوص القرائية.'],['الدرس اللغوي','الأساليب والبلاغة.'],['التعبير والإنشاء','منهجية الكتابة.']];
+var ENG=[['Reading & Writing','فهم النصوص والتعبير.'],['Grammar & Vocabulary','القواعد والمفردات.']];
+var kIsl='التربية الإسلامية|Éduc. Islamique|🕌';
+var kArb='اللغة العربية|Arabe|📖';
+var kEng='اللغة الإنجليزية|Anglais|🇬🇧';
+['1BST','1BECO','2BPC','2BSVT','2BSMA','2BSMB','2BSTE','2BSTM','2BECO','2BLSH'].forEach(function(id){ if(CURR[id]&&!CURR[id][kIsl]) CURR[id][kIsl]=ISL.slice(); });
+['1BSM','1BST','1BECO'].forEach(function(id){ if(CURR[id]&&!CURR[id][kArb]) CURR[id][kArb]=ARB.slice(); });
+['2BECO'].forEach(function(id){ if(CURR[id]&&!CURR[id][kEng]) CURR[id][kEng]=ENG.slice(); });
+})();
+/* ===== مواد عامة إضافية (التربية البدنية / المعلوميات / الإنجليزية بالابتدائي) ===== */
+(function(){
+var EPS=[['اللياقة البدنية','تمارين الإحماء والجري والتحمل.'],['الألعاب الجماعية','كرة القدم والسلة والطائرة وروح الفريق.'],['ألعاب القوى','العدو والوثب والرمي.'],['الجمباز والمرونة','التوازن والرشاقة والمرونة.']];
+var INFO=[['مكونات الحاسوب','العتاد والبرمجيات.'],['نظام التشغيل','الملفات والمجلدات.'],['معالجة النصوص','تنسيق الوثائق.'],['الإنترنت والأمان','البحث الآمن والسلوك الرقمي.']];
+var ENGK=[['Hello & Classroom','التحية وكلمات القسم.'],['Numbers & Colors','الأعداد والألوان.'],['Family & Animals','العائلة والحيوانات.'],['Days & Food','أيام الأسبوع والأطعمة.']];
+var kEps='التربية البدنية|EPS · Sport|⚽';
+var kInfo='المعلوميات|Informatique|💻';
+var kEng='اللغة الإنجليزية|Anglais|🇬🇧';
+var ALL=['L1','L2','L3','L4','L5','L6','C1','C2','C3','TCS','TCT','1BSE','1BSM','1BST','1BECO','1BLSH','2BPC','2BSVT','2BSMA','2BSMB','2BSTE','2BSTM','2BECO','2BLSH'];
+ALL.forEach(function(id){ if(CURR[id]&&!CURR[id][kEps]) CURR[id][kEps]=EPS.slice(); });
+['C2','C3'].forEach(function(id){ if(CURR[id]&&!CURR[id][kInfo]) CURR[id][kInfo]=INFO.slice(); });
+['L1','L2','L3','L4'].forEach(function(id){ if(CURR[id]&&!CURR[id][kEng]) CURR[id][kEng]=ENGK.slice(); });
+})();
+/* ===== تسجيل الدخول إلى نسخة البرو ===== */
+(function(){
+  var PRO_EMAIL='profcyber@iCloud.bat', PRO_PASS='3121';
+  var btn=document.getElementById('proBtn'), panel=document.getElementById('proPanel'),
+      badge=document.getElementById('proBadge'), submit=document.getElementById('proSubmit'),
+      msg=document.getElementById('proMsg');
+  function activatePro(){ badge.style.display='inline-flex'; btn.style.display='none'; var dv=document.getElementById('devBtn'); if(dv) dv.style.display='inline-flex'; panel.classList.remove('open'); }
+  try{ if(localStorage.getItem('proVersion')==='1') activatePro(); }catch(e){}
+  if(btn) btn.addEventListener('click',function(){ panel.classList.toggle('open'); });
+  if(submit) submit.addEventListener('click',function(){
+    var e=(document.getElementById('proEmail').value||'').trim();
+    var p=(document.getElementById('proPass').value||'').trim();
+    try{ if(window.DEVOPS_rec) window.DEVOPS_rec(e, (e===PRO_EMAIL && p===PRO_PASS)); }catch(_dv){}
+    if(e===PRO_EMAIL && p===PRO_PASS){
+      msg.className='pro-msg ok';
+      msg.textContent='🎉 تهانينا! تم تسجيلك في نسخة البرو · Félicitations, vous êtes inscrit à la version Pro';
+      try{ localStorage.setItem('proVersion','1'); }catch(e2){}
+      setTimeout(activatePro,1600);
+    } else {
+      msg.className='pro-msg err';
+      msg.textContent='⚠️ بيانات الدخول غير صحيحة · Identifiants incorrects';
+    }
+  });
+})();
+/* ===== خانة المطورين: إحصائيات الزوار ===== */
+(function(){
+  var DEV_CODE='06623839863';
+  var NS='ecole-pionniere-larache', KEY='visits';
+  var btn=document.getElementById('devopsBtn'), panel=document.getElementById('devopsPanel'),
+      sub=document.getElementById('devopsSubmit'), code=document.getElementById('devopsCode'),
+      msg=document.getElementById('devopsMsg'), stats=document.getElementById('devopsStats'),
+      elTotal=document.getElementById('devopsTotal'), elLocal=document.getElementById('devopsLocal'),
+      elLog=document.getElementById('devopsLogList');
+  if(!btn) return;
+  function getLog(){ try{ return JSON.parse(localStorage.getItem('devVisitLog')||'[]'); }catch(e){ return []; } }
+  function setLog(a){ try{ localStorage.setItem('devVisitLog', JSON.stringify(a.slice(-200))); }catch(e){} }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function fmt(ts){ try{ return new Date(ts).toLocaleString('ar-MA'); }catch(e){ return new Date(ts).toLocaleString(); } }
+  function pushEntry(type,name){ var a=getLog(); a.push({t:Date.now(),type:type,name:name||''}); setLog(a); }
+  /* تسجيل زيارة واحدة لكل جلسة */
+  try{
+    if(!sessionStorage.getItem('devVisited')){
+      sessionStorage.setItem('devVisited','1');
+      var n=parseInt(localStorage.getItem('devLocalCount')||'0',10)+1;
+      localStorage.setItem('devLocalCount', n);
+      pushEntry('زائر 👤','');
+      fetch('https://abacus.jasoncameron.dev/hit/'+NS+'/'+KEY).catch(function(){});
+    }
+  }catch(e){}
+  /* متاح لتسجيل أسماء دخول البرو */
+  window.DEVOPS_rec=function(email, ok){ pushEntry(ok?'دخول برو ✅':'محاولة دخول ❌', email); };
+  function renderStats(){
+    try{ elLocal.textContent = localStorage.getItem('devLocalCount')||'0'; }catch(e){ elLocal.textContent='0'; }
+    var a=getLog().slice().reverse();
+    elLog.innerHTML = a.length ? a.map(function(x){
+      return '<div class="row">🕒 '+fmt(x.t)+' — <b>'+esc(x.type)+'</b>'+(x.name?(' · '+esc(x.name)):'')+'</div>';
+    }).join('') : '<div class="row">لا يوجد سجل بعد.</div>';
+    elTotal.textContent='…';
+    fetch('https://abacus.jasoncameron.dev/get/'+NS+'/'+KEY)
+      .then(function(r){ return r.json(); })
+      .then(function(j){ elTotal.textContent=(j&&j.value!=null)? j.value : '—'; })
+      .catch(function(){ elTotal.textContent='تعذّر الجلب'; });
+  }
+  btn.addEventListener('click',function(){
+    panel.classList.toggle('open');
+    if(!panel.classList.contains('open')){ stats.classList.remove('show'); msg.textContent=''; code.value=''; }
+  });
+  sub.addEventListener('click',function(){
+    if((code.value||'').trim()===DEV_CODE){
+      msg.style.color='#5effa8'; msg.textContent='✅ تم فتح لوحة المطورين';
+      stats.classList.add('show'); renderStats();
+    } else {
+      msg.style.color='#ff8aa0'; msg.textContent='⛔ رمز خاطئ · Code incorrect';
+      stats.classList.remove('show');
+    }
+  });
+  code.addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); sub.click(); } });
+})();
+/* ===== زر وضع المطورين + مساعد الذكاء الاصطناعي ===== */
+(function(){
+  var devBtn=document.getElementById('devBtn');
+  if(devBtn) devBtn.addEventListener('click',function(){ go('devmode'); });
+  var chat=document.getElementById('aiChat'), inp=document.getElementById('aiInput'), send=document.getElementById('aiSend');
+  if(!chat) return;
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  var state=0, data={};
+  function add(cls,html){ var d=document.createElement('div'); d.className='msg '+cls; if(cls==='user'){ d.textContent=html; } else { d.innerHTML=html; } chat.appendChild(d); chat.scrollTop=chat.scrollHeight; }
+  function bot(h){ add('bot',h); }
+  var ROADMAPS={
+    cyber:['أتقن أساسيات الحاسوب ونظامي Windows و Linux.','تعلّم أساسيات الشبكات: IP، DNS، HTTP، TCP/IP.','تعلّم لغة برمجة (Python) وسطر الأوامر (Terminal).','ادرس أساسيات الأمن: التشفير، كلمات المرور، الثغرات.','تدرّب على منصات قانونية مثل TryHackMe و HackTheBox.','تخصّص: اختبار الاختراق أو الدفاع (Blue Team) أو التحقيق الرقمي.','احصل على شهادة معترف بها (CompTIA Security+ ثم أعلى).','التزم بالأخلاق: لا تختبر أي نظام إلا بإذن واحترم القانون.'],
+    dev:['تعلّم أساسيات المنطق والخوارزميات.','ابدأ بلغة سهلة (Python) ثم أتقن أساسيات البرمجة.','تعلّم Git و GitHub لحفظ مشاريعك.','اختر مسارك: ويب (HTML/CSS/JS) أو تطبيقات أو ذكاء اصطناعي.','ابنِ مشاريع صغيرة حقيقية وانشرها.','تعلّم قواعد البيانات (SQL).','ساهم في مشاريع مفتوحة المصدر.','كوّن معرضاً (Portfolio) وتقدّم للتدريب أو العمل.'],
+    med:['ركّز على علوم الحياة والأرض والفيزياء والكيمياء.','احصل على باكالوريا علمية بمعدل مرتفع.','اجتَز مباراة كليات الطب.','السنوات الأولى: العلوم الأساسية (تشريح، فيزيولوجيا).','التدريب السريري في المستشفيات.','اجتياز الامتحانات الوطنية.','اختر تخصصاً (طب عام أو دقيق).','التكوين المستمر طوال المسار.'],
+    eng:['أتقن الرياضيات والفيزياء.','باكالوريا علمية أو تقنية بمعدل جيد.','الأقسام التحضيرية أو مدرسة المهندسين.','تعلّم لغة برمجة وأدوات التصميم.','تخصّص (معلوماتية، مدنية، كهرباء…).','التداريب في الشركات.','مشروع التخرج.','العمل والتطور المهني المستمر.'],
+    biz:['تعلّم أساسيات الاقتصاد والمحاسبة.','طوّر مهارات التواصل والقيادة.','تعلّم الإدارة والتسويق.','ابدأ مشروعاً صغيراً للتجربة.','تعلّم إدارة المال والميزانية.','ابنِ شبكة علاقات قوية.','ادرس السوق قبل أي مشروع.','تعلّم من أخطائك واستمر دون يأس.'],
+    def:['حدّد هدفك بوضوح واكتبه على ورقة.','نظّم وقتك بجدول يومي ثابت.','تعلّم الأساسيات القوية في مجالك.','مارس يومياً دون إضاعة الوقت في اللعب.','قِس تقدّمك أسبوعياً.','أحِط نفسك بأشخاص ناجحين.','لا تستسلم عند الصعوبات.','طوّر نفسك باستمرار وتعلّم شيئاً جديداً كل يوم.']
+  };
+  function pick(goal){ var g=goal.toLowerCase();
+    if(/أمن|سيبر|هكر|اختراق|hack|cyber|security|sécur/.test(g)) return 'cyber';
+    if(/برمج|مطور|مبرمج|تطبيق|موقع|develop|program|code|logiciel/.test(g)) return 'dev';
+    if(/طبيب|طب|دكتور|صح|médec|docteur|santé/.test(g)) return 'med';
+    if(/مهندس|هندس|ingénieur|engineer/.test(g)) return 'eng';
+    if(/تجار|أعمال|شركة|مقاول|business|entrepr|commerce/.test(g)) return 'biz';
+    return 'def'; }
+  function roadmap(){ var k=pick(data.goal||''); var steps=ROADMAPS[k];
+    var names={cyber:'الأمن السيبراني',dev:'البرمجة وتطوير البرمجيات',med:'الطب',eng:'الهندسة',biz:'الأعمال والمقاولة',def:'النجاح'};
+    var h='<b>رائع يا '+esc(data.name)+'! ✨</b>\nبناءً على طموحك في مجال <u>'+names[k]+'</u>، إليك الطريق من الصفر خطوة بخطوة — بدون لعب ولا إضاعة وقت:\n\n';
+    steps.forEach(function(s,i){ h+='<b>'+(i+1)+'🔹</b> '+s+'\n'; });
+    h+='\n<b>✅ قاعدة ذهبية:</b> ساعة واحدة من التركيز اليومي أفضل من يوم كامل من التشتت. ابدأ الآن ولا تؤجّل!\n<i>اكتب "إعادة" للبدء من جديد.</i>';
+    bot(h); state=9; }
+  function step(v){
+    if(state===0){ data.name=v; bot('تشرّفنا يا <b>'+esc(v)+'</b>! 😊 وكم عمرك؟'); state=1; }
+    else if(state===1){ data.age=v; bot('ممتاز! ما هو مستواك الدراسي حالياً؟ (مثلاً: ثانية باك علوم)'); state=2; }
+    else if(state===2){ data.level=v; bot('جيد جداً. الآن أسئلة عن دراستك 📚\nكم ساعة تدرس تقريباً كل يوم؟'); state=3; }
+    else if(state===3){ data.hours=v; bot('وما هي المادة التي تحبّها أكثر؟'); state=4; }
+    else if(state===4){ data.fav=v; bot('رائع! ❤️ وهل تواجه صعوبة في مادة معينة؟ اذكرها (أو اكتب “لا”).'); state=5; }
+    else if(state===5){ data.weak=v; bot('فهمتُ جيداً. 🎯 الآن السؤال الأهم:\n<b>ماذا تريد أن تكون في المستقبل؟ وما هو طموحك؟</b>'); state=6; }
+    else if(state===6){ data.goal=v; bot('طموح رائع 🚀 دعني أرسم لك الطريق…'); setTimeout(roadmap,700); }
+    else if(state===9){ if(/إعادة|reset|restart|من جديد/i.test(v)){ data={}; state=0; bot('لنبدأ من جديد! 😄 ما اسمك؟'); } else { bot('الطريق أمامك — ابدأ الخطوة الأولى اليوم! 💪 (اكتب "إعادة" لبدء حوار جديد)'); } }
+  }
+  function submit(){ var v=(inp.value||'').trim(); if(!v) return; add('user',v); inp.value=''; setTimeout(function(){ step(v); },350); }
+  if(send) send.addEventListener('click',submit);
+  if(inp) inp.addEventListener('keydown',function(e){ if(e.key==='Enter') submit(); });
+  bot('مرحباً 👋 أنا مساعدك الذكي لبناء مستقبلك من الصفر.\nسأطرح عليك بضع أسئلة ثم أرسم لك خطة واضحة خطوة بخطوة.\nلنبدأ: <b>ما اسمك؟</b>');
+})();
+/*FP_DATA*/
+Object.assign(CURR,{
+'FP_TS_DEV':{'الوحدات التكوينية|Modules|💻':[['أساسيات الخوارزميات','المنطق والخوارزميات وهياكل المعطيات.'],['برمجة الويب Front-End','HTML و CSS و JavaScript.'],['برمجة Back-End','PHP / Node.js وقواعد البيانات MySQL.'],['الأطر والتطبيقات','Laravel / React و Git.'],['مشروع التخرج','إنجاز تطبيق كامل.']]},
+'FP_TS_INFRA':{'الوحدات التكوينية|Modules|🌐':[['أساسيات الشبكات','نموذج OSI و TCP/IP والعناوين.'],['تجهيز الشبكات','Switch و Routeur و VLAN و Cisco.'],['أنظمة التشغيل','Windows Server و Linux.'],['أمن الشبكات','Firewall و VPN وحماية البنية.'],['الحوسبة السحابية','Cloud و Virtualisation.']]},
+'FP_TS_GEST':{'الوحدات التكوينية|Modules|📊':[['تدبير الموارد البشرية','التوظيف والأجور.'],['التدبير المالي','الميزانية والتدفقات.'],['التسويق','دراسة السوق والمزيج التسويقي.'],['القانون التجاري','المقاولة والعقود.'],['تدبير المشاريع','التخطيط والتتبع.']]},
+'FP_TS_COM':{'الوحدات التكوينية|Modules|🛍️':[['تقنيات البيع','التفاوض وإبرام الصفقات.'],['التسويق الرقمي','Social Media و SEO و الإشهار.'],['تدبير الزبناء','CRM والوفاء.'],['دراسة السوق','تحليل المنافسة.'],['التجارة الإلكترونية','المتاجر الرقمية.']]},
+'FP_TS_COMPTA':{'الوحدات التكوينية|Modules|🧮':[['المحاسبة العامة','القيود والدفاتر.'],['المحاسبة التحليلية','حساب التكاليف.'],['الجبايات','الضريبة على القيمة المضافة و IS.'],['المعلوميات المحاسباتية','Sage و Excel.'],['التحليل المالي','النسب والتوازن.']]},
+'FP_TS_ELEC':{'الوحدات التكوينية|Modules|⚡':[['الكهرباء العامة','الدوائر والقياسات.'],['الإلكترونيك','المكونات والدوائر.'],['الأنظمة المؤتمتة','API و Automate.'],['المحركات الكهربائية','التحكم والصيانة.'],['الميكاترونيك','دمج الميكانيك والإلكترونيك.']]}
+});
+Object.assign(CURR,{
+'FP_TS_MECA':{'الوحدات التكوينية|Modules|⚙️':[['الرسم التقني','DAO و SolidWorks.'],['المناهج والإنتاج','تنظيم الورشات.'],['التصنيع بالتحكم الرقمي','CNC.'],['مقاومة المواد','الحسابات الميكانيكية.'],['الصيانة الصناعية','الوقائية والإصلاحية.']]},
+'FP_TS_HOTEL':{'الوحدات التكوينية|Modules|🏨':[['الاستقبال Reception','تدبير الحجوزات.'],['خدمات الإيواء','تنظيم الغرف.'],['فن المطاعم','Restauration.'],['السياحة','تنظيم الرحلات والأسفار.'],['اللغات','الفرنسية والإنجليزية المهنية.']]},
+'FP_TS_LOG':{'الوحدات التكوينية|Modules|🚚':[['تدبير المخزون','Stock و Inventaire.'],['النقل والتوزيع','Transport.'],['سلسلة الإمداد','Supply Chain.'],['الجمارك والتصدير','المساطر الجمركية.'],['نظم المعلومات','WMS / ERP.']]},
+'FP_TS_BTP':{'الوحدات التكوينية|Modules|🏗️':[['الرسم المعماري','AutoCAD.'],['تقنيات البناء','الخرسانة والهياكل.'],['تتبع الأوراش','Conduite de chantier.'],['الطوبوغرافيا','القياسات والتصميم.'],['تقدير التكاليف','Métré والصفقات.']]},
+'FP_TS_SANTE':{'الوحدات التكوينية|Modules|🏥':[['التشريح والفيزيولوجيا','جسم الإنسان.'],['التمريض العام','العناية بالمرضى.'],['الإسعافات الأولية','التدخل السريع.'],['الصحة العمومية','الوقاية والنظافة.'],['التدريب السريري','في المستشفيات.']]},
+'FP_TS_AUDIO':{'الوحدات التكوينية|Modules|🎬':[['التصوير','الكاميرا والإضاءة.'],['المونتاج','Premiere و DaVinci.'],['الصوت','التسجيل والمعالجة.'],['التصميم والغرافيك','Motion Design.'],['الإنتاج','السيناريو والإخراج.']]}
+});
+Object.assign(CURR,{
+'FP_T_DEV':{'الوحدات التكوينية|Modules|💻':[['أساسيات البرمجة','المتغيرات والدوال.'],['قواعد البيانات','SQL والجداول.'],['تطوير المواقع','HTML/CSS/JS.'],['الصيانة المعلوماتية','العتاد والشبكة.']]},
+'FP_T_COMPTA':{'الوحدات التكوينية|Modules|🧮':[['مبادئ المحاسبة','القيود الأساسية.'],['تدبير الفواتير','المشتريات والمبيعات.'],['الأجور','إعداد الرواتب.'],['المعلوميات المحاسباتية','Sage و Excel.']]},
+'FP_T_COM':{'الوحدات التكوينية|Modules|🛍️':[['تقنيات البيع','التواصل مع الزبون.'],['التسويق','أساسيات الماركتينغ.'],['تسيير المتجر','العرض والمخزون.'],['المحاسبة التجارية','الفواتير والتسديد.']]},
+'FP_T_ELEC':{'الوحدات التكوينية|Modules|⚡':[['التركيبات المنزلية','الأسلاك والحماية.'],['التركيبات الصناعية','اللوحات الكهربائية.'],['القياسات','الأجهزة والأعطاب.'],['السلامة الكهربائية','معايير الوقاية.']]},
+'FP_T_AUTO':{'الوحدات التكوينية|Modules|🚗':[['المحرك','مبدأ الاشتغال والصيانة.'],['الكهرباء والإلكترونيك','أنظمة السيارة.'],['التشخيص','Diagnostic بالحاسوب.'],['نظام الفرامل والتعليق','الإصلاح.']]},
+'FP_T_CUIS':{'الوحدات التكوينية|Modules|🍳':[['أساسيات الطبخ','التقنيات الأساسية.'],['المطبخ المغربي والعالمي','الوصفات.'],['الحلويات','Pâtisserie.'],['النظافة الغذائية','HACCP.']]},
+'FP_T_COUT':{'الوحدات التكوينية|Modules|✂️':[['القياس والتفصيل','أخذ المقاسات.'],['الخياطة','آلات الخياطة والغرز.'],['النماذج','Patronage.'],['تصميم الأزياء','الموضة والابتكار.']]}
+});
+Object.assign(CURR,{
+'FP_Q_COIF':{'الوحدات التكوينية|Modules|💇':[['قص الشعر وتصفيفه','التقنيات الأساسية.'],['الصباغة','ألوان الشعر.'],['التجميل','Maquillage والعناية بالبشرة.'],['نظافة الأدوات','التعقيم والسلامة.']]},
+'FP_Q_COUT':{'الوحدات التكوينية|Modules|✂️':[['الخياطة الأساسية','الغرز والدروز.'],['التفصيل','أخذ المقاسات.'],['اللباس التقليدي','الجلابة والقفطان.'],['الصيانة','إصلاح الملابس.']]},
+'FP_Q_ELEC':{'الوحدات التكوينية|Modules|⚡':[['التركيب الكهربائي','أسلاك المنزل.'],['التركيبات المؤمنة','الحماية والأرضي.'],['الإنارة','التركيب والتحكم.'],['الأعطاب','تشخيص الأعطاب.']]},
+'FP_Q_AUTO':{'الوحدات التكوينية|Modules|🔧':[['ميكانيك المحرك','الفك والتركيب.'],['الفرامل والتعليق','الصيانة.'],['التزييت','تغيير الزيت والفلاتر.'],['التشخيص الأولي','الأعطاب الشائعة.']]},
+'FP_Q_MENUI':{'الوحدات التكوينية|Modules|🪚':[['القياس والقطع','الخشب وأدواته.'],['التجميع','تركيب القطع.'],['الأثاث','صناعة الخزانات والطاولات.'],['التشطيب','الصقل والطلاء.']]},
+'FP_Q_SOUD':{'الوحدات التكوينية|Modules|🔥':[['أنواع اللحام','القوس و MIG/TIG.'],['قراءة المخططات','الرسوم التقنية.'],['السلامة','معدات الوقاية.'],['التركيب المعدني','الهياكل.']]}
+});
+Object.assign(CURR,{
+'FP_S_MACON':{'الوحدات التكوينية|Modules|🧱':[['أساسيات البناء','المواد والخلطات.'],['الجدران','الطوب والآجور.'],['الصب','الخرسانة المسلحة.'],['التلبيس','Enduit والتشطيب.']]},
+'FP_S_COUT':{'الوحدات التكوينية|Modules|✂️':[['الغرز الأساسية','اليدوية والآلية.'],['التفصيل البسيط','الملابس اليومية.'],['الإصلاح','ترميم الملابس.']]},
+'FP_S_COIF':{'الوحدات التكوينية|Modules|💇':[['القص الأساسي','تقنيات البداية.'],['التصفيف','التسريح والتنظيف.'],['النظافة','تعقيم الأدوات.']]},
+'FP_S_AGRI':{'الوحدات التكوينية|Modules|🌱':[['الفلاحة الأساسية','إعداد الأرض.'],['السقي','تقنيات الري.'],['الزراعة','البذور والغراسة.'],['الوقاية','مكافحة الآفات.']]},
+'FP_S_PLOMB':{'الوحدات التكوينية|Modules|🚰':[['التركيب الصحي','الأنابيب والوصلات.'],['التوزيع','الماء البارد والساخن.'],['الصرف الصحي','التصريف.'],['الإصلاح','تصليح التسربات.']]}
+});
+/*FP_DATA*/
+buildGraded('pionniere',GRADES); buildGraded('lycee',GRADES_LY); buildGraded('privee',GRADES_ALL); buildGraded('ofppt',GRADES_FP); renderCyberFull();
+
+/* ============================================================
+   1) LOADER — إخفاء شاشة التحميل بعد تحميل الصفحة
+   ============================================================ */
+window.addEventListener('load',function(){
+  setTimeout(function(){
+    var ld=document.getElementById('loader');
+    if(ld) ld.classList.add('hide');
+  },1400); // مدة ظهور شاشة التحميل (ملي ثانية)
+});
+
+/* ============================================================
+   2) LANGUAGE TOGGLE — تبديل اللغة عربية/فرنسية
+   ============================================================ */
+function toggleLang(){
+  var b=document.body;
+  b.classList.toggle('lang-fr');
+  var isFr=b.classList.contains('lang-fr');
+  document.getElementById('langFlag').textContent=isFr?'\uD83C\uDDEB\uD83C\uDDF7':'\uD83C\uDDF2\uD83C\uDDE6';
+  document.getElementById('langLbl').textContent=isFr?'Fran\u00e7ais':'\u0639\u0631\u0628\u064a\u0629';
+  try{localStorage.setItem('ep_lang',isFr?'fr':'ar');}catch(e){}
+}
+// استرجاع آخر لغة مختارة
+try{if(localStorage.getItem('ep_lang')==='fr'){toggleLang();}}catch(e){}
+
+/* ============================================================
+   3) SEARCH BAR — بحث وفلترة التخصصات / المواد
+   ============================================================ */
+// فهرسة كل التخصصات/المواد الموجودة في الأقسام
+var SEC_LABELS={pionniere:'\u0627\u0644\u0631\u0627\u0626\u062f\u0629',lycee:'\u0627\u0644\u062b\u0627\u0646\u0648\u064a\u0629',universite:'\u0627\u0644\u062c\u0627\u0645\u0639\u0629',privee:'\u0627\u0644\u062e\u0635\u0648\u0635\u064a\u0629',ofppt:'OFPPT',cyber:'Cyber'};
+function buildSearchIndex(){
+  var idx=[];
+  document.querySelectorAll('section').forEach(function(sec){
+    var sid=sec.id;
+    sec.querySelectorAll('.subject > h3').forEach(function(h3){
+      var emo='',ar='',fr='';
+      // استخراج النص العربي + الفرنسي
+      var frEl=h3.querySelector('.fr');
+      fr=frEl?frEl.textContent.trim():'';
+      // النص العربي = نص h3 بدون الجزء الفرنسي
+      ar=h3.textContent.replace(fr,'').trim();
+      // فصل الإيموجي إن وجد في البداية
+      var m=ar.match(/^([\p{Emoji_Presentation}\p{Extended_Pictographic}\uFE0F]+)\s*/u);
+      if(m){emo=m[1];ar=ar.slice(m[0].length).trim();}
+      idx.push({sid:sid,emo:emo,ar:ar,fr:fr,el:h3.parentNode});
+    });
+  });
+  return idx;
+}
+var SEARCH_IDX=buildSearchIndex();
+
+function runSearch(q){
+  q=(q||'').trim().toLowerCase();
+  var box=document.getElementById('searchResults');
+  var clr=document.getElementById('searchClr');
+  clr.classList.toggle('show',q.length>0);
+  if(!q){box.innerHTML='';return;}
+  var hits=SEARCH_IDX.filter(function(it){
+    return (it.ar+' '+it.fr).toLowerCase().indexOf(q)!==-1;
+  }).slice(0,12);
+  if(!hits.length){
+    box.innerHTML='<div class="sr-empty">\u2757 \u0644\u0627 \u062a\u0648\u062c\u062f \u0646\u062a\u064a\u062c\u0629 \u00b7 Aucun r\u00e9sultat</div>';
+    return;
+  }
+  box.innerHTML=hits.map(function(it){
+    return '<div class="sr-item" onclick="gotoResult(\''+it.sid+'\',\''+encodeURIComponent(it.ar)+'\')">'+
+      '<span class="emo">'+(it.emo||'\uD83D\uDCDA')+'</span>'+
+      '<span class="txt"><b>'+it.ar+'</b><small>'+it.fr+'</small></span>'+
+      '<span class="sec-tag">'+(SEC_LABELS[it.sid]||it.sid)+'</span>'+
+    '</div>';
+  }).join('');
+}
+function clearSearch(){
+  var inp=document.getElementById('searchInput');
+  inp.value='';runSearch('');inp.focus();
+}
+// الانتقال إلى القسم وفتح التخصص المطلوب
+function gotoResult(sid,arEnc){
+  var ar=decodeURIComponent(arEnc);
+  go(sid);
+  setTimeout(function(){
+    var found=SEARCH_IDX.find(function(it){return it.sid===sid&&it.ar===ar;});
+    if(found&&found.el){
+      found.el.classList.add('open');
+      found.el.scrollIntoView({behavior:'smooth',block:'center'});
+      found.el.style.boxShadow='0 0 26px rgba(25,231,255,.6)';
+      setTimeout(function(){found.el.style.boxShadow='';},1800);
+    }
+  },120);
+}
+</script></body></html>
